@@ -32,12 +32,21 @@
 
 
         <form action="Ex4-3Result.php" method="get">
-            <br>
+            <br />
             <h3>Choose your trip</h3>
-            <br>
+            <br />
 
-            <br>
-            From
+            <input type="radio" name="trip" value="1" checked> One-way
+            <input type="radio" name="trip" value="2"> Round-trip
+
+            <label class="toggler-wrapper style-2">
+                <input type="checkbox">
+                <div class="toggler-slider">
+                    <div class="toggler-knob"></div>
+                </div>
+            </label>
+
+            <h3>From</h3>
             <select name='selectWeight' required>
                 <option value=''>Select weight...</option>
                 <?php
@@ -46,7 +55,7 @@
                 }
                 ?>
             </select>
-            <br><br>
+            <br /><br />
 
             To
             <select name='selectCategory' required>
@@ -57,7 +66,18 @@
                 }
                 ?>
             </select>
-            <br><br>
+            <br /><br />
+            <h3>Discount</h3>
+            <select name='selectWeight'>
+                <option value=''>Select a discount...</option>
+                <?php
+                for ($i = 0; $i < count($weight); $i++) {
+                    echo "<option value='$i'>" . $weight[$i] . "</option>";
+                }
+                ?>
+            </select>
+            <br />
+            <br /><br />
             <input type="submit" value="Submit" class="primary-bg" />
         </form>
 
