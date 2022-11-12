@@ -1,11 +1,56 @@
-table,
+body {
+    --primary: #80bd01;
+}
+
+
+.primary-bg {
+    background-color: var(--primary);
+}
+
+.primary-color {
+    color: var(--primary);
+}
+
+
+select {
+    width: auto;
+    height: auto;
+    border-radius: 5px;
+    border: 1px solid;
+    background-color: ;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+
+input[type="submit"] {
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    padding: 7px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+table {
+    border-radius: 20px;
+}
 th,
 td {
     border-collapse: collapse;
-    border: 1px solid;
+    border-bottom: 1px solid grey;
+        padding: 3px 10px;
 }
 
 td {
     width: 100px;
     text-align: center;
+}
+tr:nth-child(even) {
+    background: whitesmoke;
+}
+
+tr:nth-child(odd) {
+    background: gainsboro;
 }
