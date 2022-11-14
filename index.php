@@ -5,6 +5,8 @@
     <title>KL Monorail Fares</title>
 
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/toggleButton.css">
+
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
@@ -39,12 +41,6 @@
             <input type="radio" name="trip" value="1" checked> One-way
             <input type="radio" name="trip" value="2"> Round-trip
 
-            <label class="toggler-wrapper style-2">
-                <input type="checkbox">
-                <div class="toggler-slider">
-                    <div class="toggler-knob"></div>
-                </div>
-            </label>
 
             <h3>From</h3>
             <select name='selectWeight' required>
@@ -111,6 +107,24 @@
 
             </p>
         </details>
+
+
+        <div class="wrapper d-flex">
+            <div class="custom-control custom-radio iconSelect mr-2">
+                <input type="radio" id="customRadio1" name="customRadio" value="1" class="custom-control-input" checked>
+                <label class="custom-control-label" for="customRadio1">
+                    email
+                </label>
+            </div>
+
+            <div class="custom-control custom-radio iconSelect ml-2">
+                <input type="radio" id="customRadio2" name="customRadio" value="2" class="custom-control-input">
+                <label class="custom-control-label" for="customRadio2">
+                    phone
+                </label>
+            </div>
+        </div>
+
 
     </section>
 
