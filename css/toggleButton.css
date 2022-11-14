@@ -1,0 +1,60 @@
+body {
+    --borderRadius: 5px;
+}
+
+
+.wrapper {
+    width: fit-content;
+    background: lightgrey;
+    padding: 10px;
+    border-radius: var(--borderRadius);
+    display: flex;
+}
+
+.custom-control-input {
+    display: none;
+}
+
+.iconSelect {
+    width: 100%;
+}
+
+.iconSelect.custom-control {
+    padding-left: 0;
+}
+
+.iconSelect-icon {
+    width: 3rem;
+    height: 3rem;
+}
+
+.iconSelect .custom-control-label {
+    background-color: #eee;
+    width: 100%;
+    text-align: center;
+    border-radius: var(--borderRadius);
+    padding: var(--borderRadius);
+    transition: background-color 0.1s linear, color 0.1s linear;
+}
+
+.iconSelect .custom-control-label svg {
+    fill: currentColor;
+}
+
+.iconSelect .custom-control-label:hover {
+    background-color: #ccc;
+}
+
+.iconSelect .custom-control-label::before,
+.iconSelect .custom-control-label::after {
+    top: auto;
+    left: 0;
+    right: 0;
+    bottom: 1rem;
+    margin: auto;
+}
+
+.iconSelect .custom-control-input:checked~.custom-control-label {
+    background: #FF6300;
+    color: #fff;
+}
