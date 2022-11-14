@@ -47,6 +47,7 @@
                     array(2.50, 2.50, 2.50, 2.10, 2.10, 2.10, 1.60, 1.60, 1.60, 1.20, 0)
                 );
                 $discount = array(
+                    array("name" => "Adult", "value" => 1),
                     array("name" => "Senior Citizens", "value" => 0.25),
                     array("name" => "Disabled", "value" => 0.40),
                     array("name" => "Students", "value" => 0.30)
@@ -99,47 +100,22 @@
             </select>
             <br /><br />
             <h3>Discount</h3>
-            <select name='selectDiscount'>
-                <option value=''>Select a discount...</option>
+            <div class="wrapper d-flex">
                 <?php
-                for ($i = 0; $i < count($discount); $i++) {
-                    echo "<option value='$discount[$i]['value']'>" . $discount[$i]["name"] . "</option>";
+                for ($i = 0; $i < count($discount); $i++) { ?>
+                    <div class="custom-control custom-radio iconSelect mr-2">
+                        <input type="radio" id="customRadio1" name="customRadio" value="1" class="custom-control-input" checked>
+                        <label class="custom-control-label" for="customRadio1">
+                            <?php
+                                echo $discount[$i]["name"];
+                            ?>
+                        </label>
+                    </div>
+                <?php
                 }
                 ?>
-            </select>
-            <br />
-
-
-            <div class="wrapper d-flex">
-                <div class="custom-control custom-radio iconSelect mr-2">
-                    <input type="radio" id="customRadio1" name="customRadio" value="1" class="custom-control-input" checked>
-                    <label class="custom-control-label" for="customRadio1">
-                        Adult
-                    </label>
-                </div>
-
-                <div class="custom-control custom-radio iconSelect ml-2">
-                    <input type="radio" id="customRadio2" name="customRadio" value="2" class="custom-control-input">
-                    <label class="custom-control-label" for="customRadio2">
-                        Student
-                    </label>
-                </div>
-
-                <div class="custom-control custom-radio iconSelect ml-2">
-                    <input type="radio" id="customRadio2" name="customRadio" value="2" class="custom-control-input">
-                    <label class="custom-control-label" for="customRadio2">
-                        Senior
-                    </label>
-                </div>
-
-                <div class="custom-control custom-radio iconSelect ml-2">
-                    <input type="radio" id="customRadio2" name="customRadio" value="2" class="custom-control-input">
-                    <label class="custom-control-label" for="customRadio2">
-                        Disabled
-                    </label>
-                </div>
             </div>
-
+            <br />
 
             <br /><br />
             <input type="submit" value="Submit" class="primary-bg" />
