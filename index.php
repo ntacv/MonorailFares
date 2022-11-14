@@ -113,19 +113,18 @@
                             //echo "</tr>";
                         ?>
                     </tr>
-                    <tr>
-                        <?php
-                            for ($rows = 0; $rows < count($fares); $rows++) {
-                                //echo "<tr>";
-                                echo "<td>" . $stations[$rows] . "</td>";
-                                for ($col = 0; $col < count($fares[$rows]); $col++) {
-                                    echo "<td>" . $fares[$rows][$col] . "</td>";
-                                }
-                                //echo "</tr>";
+                    
+                    <?php
+                        for ($rows = 0; $rows < count($fares); $rows++) {
+                            echo "<tr>";
+                            echo "<td>" . $stations[$rows] . "</td>";
+                            for ($col = 0; $col < count($fares[$rows]); $col++) {
+                                echo "<td>" . $fares[$rows][$col] . "</td>";
                             }
-                            //echo "</table>";
-                        ?>
-                    </tr>
+                            echo "</tr>";
+                        }
+                        //echo "</table>";
+                    ?>
                 </table>
 
 
