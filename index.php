@@ -104,25 +104,33 @@
             <summary>Show fule fares</summary>
             <p>
                 Table
-                <?php
-                echo "<table>";
-                echo "<tr>";
-                echo "<th>From/To</th>";
-                for ($i = 0; $i < count($stations); $i++) {
-                    echo "<td>" . $stations[$i] . "</td>";
-                }
-                echo "</tr>";
-
-                for ($rows = 0; $rows < count($fares); $rows++) {
-                    echo "<tr>";
-                    echo "<td>" . $stations[$rows] . "</td>";
-                    for ($col = 0; $col < count($fares[$rows]); $col++) {
-                        echo "<td>" . $fares[$rows][$col] . "</td>";
-                    }
-                    echo "</tr>";
-                }
-                echo "</table>";
-                ?>
+                <table>
+                    <tr>
+                        <th>From/To</th>
+                        <?php
+                            //echo "<table>";
+                            //echo "<tr>";
+                            //echo "<th>From/To</th>";
+                            for ($i = 0; $i < count($stations); $i++) {
+                                echo "<td>" . $stations[$i] . "</td>";
+                            }
+                            //echo "</tr>";
+                        ?>
+                    </tr>
+                    <tr>
+                        <?php
+                            for ($rows = 0; $rows < count($fares); $rows++) {
+                                //echo "<tr>";
+                                echo "<td>" . $stations[$rows] . "</td>";
+                                for ($col = 0; $col < count($fares[$rows]); $col++) {
+                                    echo "<td>" . $fares[$rows][$col] . "</td>";
+                                }
+                                //echo "</tr>";
+                            }
+                            //echo "</table>";
+                        ?>
+                    </tr>
+                </table>
 
 
             </p>
