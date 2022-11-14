@@ -16,16 +16,33 @@
 
         <h1>KL Monorail fares</h1>
 
-        <p>Sascha</p>
+        <!-- 
+            Variables: 
+                ARRAYS
+                    $stations
+                    $fares
+                OTHER
+                    $stationFrom
+                    $stationTo
+                    $tokenNumber
+                    $tokenWay
+                    $discount
+                    $total
+        -->
         <?php
-        $weight = array("1 lb", "3 lb", "5 lb", "10 lb", "> 10 lb");
-        $category = array("A", "B", "C", "D");
-        $rates = array(
-            array(1.00, 1.50, 1.65, 1.85),
-            array(1.58, 2.00, 2.40, 3.05),
-            array(1.71, 2.52, 3.10, 4.00),
-            array(2.04, 3.12, 4.00, 5.01),
-            array(2.52, 3.75, 5.10, 7.25)
+        $stations = array("KL Senral", "Tun Sambanthan", "Maharajalela", "Hang Tuah", "Imbi", "Bukit Bintang", "Raja Chulan", "Bukit Nanas", "Medan Tuanku", "Chow Kit", "Titiwangsa");
+        $fares = array(
+            array(0,1.20,1.60,1.60,1.60,2.10,2.10,2.10,2.50,2.50,2.50),
+            array(1.20, 0, 1.20,1.60,1.60,1.60,2.10,2.10,2.10,2.50,2.50),
+            array(1.60,1.20,0,1.20,1.20,1.60,1.60,1.60,2.10,2.10,2.50),
+            array(1.60,1.60,1.20,0,1.20,1.20,1.20,1.60,1.60,2.10,2.10),
+            array(1.60,1.60,1.20,1.20,0,1.20,1.20,1.60,1.60,1.60,2.10),
+            array(2.10,1.60,1.60,1.20,1.20,0,1.20,1.20,1.60,1.60,2.10),
+            array(2.10,2.10,1.60,1.20,1.20,1.20,0,1.20,1.20,1.60,1.60),
+            array(2.10,2.10,1.60,1.60,1.60,1.20,1.20,0,1.20,1.20,1.60),
+            array(2.50,2.10,2.10,1.60,1.60,1.60,1.20,1.20,0,1.20,1.60),
+            array(2.50,2.50,2.10,2.10,1.60,1.60,1.60,1.20,1.20,0,1.20),
+            array(2.50,2.50,2.50,2.10,2.10,2.10,1.60,1.60,1.60,1.20,0)
         );
         ?>
 
@@ -67,21 +84,20 @@
             <summary>Show fule fares</summary>
             <p>
                 Table
-
                 <?php
                 echo "<table>";
                 echo "<tr>";
-                echo "<th>Weight/Category</th>";
-                for ($i = 0; $i < count($category); $i++) {
-                    echo "<th>" . $category[$i] . "</th>";
+                echo "<th>From/To</th>";
+                for ($i = 0; $i < count($stations); $i++) {
+                    echo "<td>" . $stations[$i] . "</td>";
                 }
                 echo "</tr>";
 
-                for ($rows = 0; $rows < count($rates); $rows++) {
+                for ($rows = 0; $rows < count($fares); $rows++) {
                     echo "<tr>";
-                    echo "<td>" . $weight[$rows] . "</td>";
-                    for ($col = 0; $col < count($rates[$rows]); $col++) {
-                        echo "<td>" . $rates[$rows][$col] . "</td>";
+                    echo "<td>" . $stations[$rows] . "</td>";
+                    for ($col = 0; $col < count($fares[$rows]); $col++) {
+                        echo "<td>" . $fares[$rows][$col] . "</td>";
                     }
                     echo "</tr>";
                 }
