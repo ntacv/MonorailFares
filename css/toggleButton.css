@@ -35,6 +35,7 @@ body {
     border-radius: var(--borderRadius);
     padding: var(--borderRadius);
     transition: background-color 0.1s linear, color 0.1s linear;
+    white-space: nowrap;
 }
 
 .iconSelect .custom-control-label svg {
@@ -55,6 +56,6 @@ body {
 }
 
 .iconSelect .custom-control-input:checked~.custom-control-label {
-    background: #FF6300;
+    background: var(--primary);
     color: #fff;
 }
