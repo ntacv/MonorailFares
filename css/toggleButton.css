@@ -1,14 +1,10 @@
-body {
-    --borderRadius: 5px;
-}
-
-
 .wrapper {
     width: fit-content;
     background: lightgrey;
-    padding: 10px;
-    border-radius: var(--borderRadius);
+    padding: var(--padding);
+        border-radius: calc(3px + var(--borderRadius));
     display: flex;
+    margin-top: 0.5em;
 }
 
 .custom-control-input {
@@ -33,7 +29,7 @@ body {
     width: 100%;
     text-align: center;
     border-radius: var(--borderRadius);
-    padding: var(--borderRadius);
+        padding: calc(0px + var(--padding));
     transition: background-color 0.1s linear, color 0.1s linear;
     white-space: nowrap;
 }

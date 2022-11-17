@@ -1,5 +1,10 @@
 body {
     --primary: #80bd01;
+    --padding: 5px;
+        --borderRadius: 5px;
+    
+        font-family: Josefin Sans, sans-serif;
+        font-size: 0.85em;
 }
 
 
@@ -33,8 +38,21 @@ body {
     color: var(--primary);
 }
 
+span.material-icons,
+i.material-icons {
+    display: ;
+    font-size: 1rem;
+    vertical-align: -3px;
+    margin-right: 0.3em;
+}
+
+span.bigIcon {
+    font-size: 0.9em;
+    vertical-align: -5px;
+}
 
 select {
+    width: 50%;
     border-bottom: 1px solid;
     font-weight: bold;
 }
@@ -47,6 +65,7 @@ input[type="submit"] {
     padding: 7px 20px;
     border-radius: 5px;
     cursor: pointer;
+    line-height: 130%;
 }
 
 
@@ -58,11 +77,13 @@ th,
 td {
     border-collapse: collapse;
     border-bottom: 1px solid grey;
-        padding: 3px 10px;
+    padding: 3px 10px;
 }
-
+tr {
+    height: 50px;
+}
 td {
-    width: 100px;
+    width: 60px;
     text-align: center;
 }
 tr:nth-child(even) {
@@ -71,63 +92,4 @@ tr:nth-child(even) {
 
 tr:nth-child(odd) {
     background: gainsboro;
-}
-/*  TEST toggle slider  */
-.toggler-wrapper.style-20 {
-    width: 81px;
-    text-align: center;
-}
-
-.toggler-wrapper.style-20 input[type="checkbox"]:checked+.toggler-slider .toggler-knob {
-    background-image: url(../img/check-fill.svg);
-}
-
-.toggler-wrapper.style-20 input[type="checkbox"]:checked+.toggler-slider .toggler-knob:before {
-    opacity: 0.4;
-}
-
-.toggler-wrapper.style-20 input[type="checkbox"]:checked+.toggler-slider .toggler-knob:after {
-    opacity: 1;
-}
-
-.toggler-wrapper.style-20 .toggler-slider {
-    background-color: #eb4f37;
-}
-
-.toggler-wrapper.style-20 .toggler-knob {
-    position: relative;
-    height: 100%;
-    background-image: url(../img/close-fill.svg);
-    background-repeat: no-repeat;
-    background-position: center;
-    width: 20px;
-    display: inline-block;
-    left: -2px;
-}
-
-.toggler-wrapper.style-20 .toggler-knob:before {
-    content: 'No';
-    position: absolute;
-    top: 50%;
-    left: -20px;
-    -webkit-transform: translateY(-50%);
-    transform: translateY(-50%);
-    font-size: 75%;
-    text-transform: uppercase;
-    font-weight: 500;
-    color: white;
-}
-
-.toggler-wrapper.style-20 .toggler-knob:after {
-    content: 'Yes';
-    position: absolute;
-    top: 50%;
-    right: -23px;
-    -webkit-transform: translateY(-50%);
-    transform: translateY(-50%);
-    font-size: 75%;
-    text-transform: uppercase;
-    font-weight: 500;
-    color: white;
-    opacity: 0.4;
 }
