@@ -69,7 +69,7 @@ input[type="submit"] {
 }
 
 
-table {
+table.chart {
     border-radius: 20px;
     zoom: 0.5;
 }

@@ -40,10 +40,8 @@
                     $total
         -->
         <?php
-        global $stations;
-        global $fares;
 
-        $stations = array("KL Senral", "Tun Sambanthan", "Maharajalela", "Hang Tuah", "Imbi", "Bukit Bintang", "Raja Chulan", "Bukit Nanas", "Medan Tuanku", "Chow Kit", "Titiwangsa");
+        $stations = array("KL Sentral", "Tun Sambanthan", "Maharajalela", "Hang Tuah", "Imbi", "Bukit Bintang", "Raja Chulan", "Bukit Nanas", "Medan Tuanku", "Chow Kit", "Titiwangsa");
         $fares = array(
             array(0, 1.20, 1.60, 1.60, 1.60, 2.10, 2.10, 2.10, 2.50, 2.50, 2.50),
             array(1.20, 0, 1.20, 1.60, 1.60, 1.60, 2.10, 2.10, 2.10, 2.50, 2.50),
@@ -63,12 +61,14 @@
             array("name" => "Disabled", "value" => 0.40, "icon" => "accessible"),
             array("name" => "Students", "value" => 0.30, "icon" => "school"),
         );
+
+
         ?>
 
 
 
 
-        <form action="result" method="get">
+        <form action="result.php" method="get">
             <br />
             <h3>Configure your trip</h3>
 
@@ -155,7 +155,9 @@
                     }
                     ?>
                     ">
-                        <input type="radio" id="discount<?php echo $i ?>" name="discount" value="1" class="custom-control-input">
+                        <input type="radio" id="discount<?php echo $i ?>" name="discountValue" value="<?php echo $i ?>" class="custom-control-input" <?php if ($i == 0) {
+                                                                                                                                                            echo " checked ";
+                                                                                                                                                        } ?>>
                         <label class="custom-control-label" for="discount<?php echo $i ?>">
 
                             <?php
@@ -176,7 +178,7 @@
         <details>
             <summary>Show fule fares</summary>
             <p><br />
-            <table>
+            <table class="chart">
                 <tr>
                     <th>From \ To</th>
                     <?php
