@@ -73,23 +73,31 @@ table.chart {
     border-radius: 20px;
     zoom: 0.5;
 }
-th,
-td {
+table.chart th,
+table.chart td {
     border-collapse: collapse;
     border-bottom: 1px solid grey;
     padding: 3px 10px;
 }
-tr {
+table.chart tr {
     height: 50px;
 }
-td {
+table.chart td {
     width: 60px;
     text-align: center;
 }
-tr:nth-child(even) {
+table.chart tr:nth-child(even) {
     background: whitesmoke;
 }
 
-tr:nth-child(odd) {
+table.chart tr:nth-child(odd) {
     background: gainsboro;
+}
+table.receipt {
+    width: 100%;
+}
+
+table.receipt td:nth-last-child(3n+1) {
+    padding: 3px 10px;
+    text-align: right;
 }

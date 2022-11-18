@@ -68,7 +68,7 @@
 
 
 
-        <form action="result.php" method="get">
+        <form action="result" method="get">
             <br />
             <h3>Configure your trip</h3>
 
@@ -78,7 +78,7 @@
                     <label class="custom-control-label" for="way1">
                         <span class="material-icons">
                             arrow_right_alt
-                        </span><span class="labelToggle">One way</span></label>
+                        </span>One way</label>
                 </div>
 
                 <div class="custom-control custom-radio iconSelect ">
@@ -217,6 +217,22 @@
             </table>
             </p>
         </details>
+
+
+        <div class="wrapper d-flex" style="zoom:0.8;">
+            <div class="custom-control custom-radio iconSelect mr-2">
+                <input type="radio" id="lang1" name="lang" value="en" class="custom-control-input" checked>
+                <label class="custom-control-label" for="lang1">
+                    <span class="labelToggle">EN</span></label>
+            </div>
+
+            <div class="custom-control custom-radio iconSelect ">
+                <input type="radio" id="lang2" name="lang" value="ml" class="custom-control-input">
+                <label class="custom-control-label" for="lang2">
+                    <span class="labelToggle">ML</span></label>
+            </div>
+        </div>
+        <br />
         <br />
         <br /><br />
         <br /><br />

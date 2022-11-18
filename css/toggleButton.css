@@ -55,3 +55,6 @@
     background: var(--primary);
     color: #fff;
 }
+.labelToggle {
+    vertical-align: -3px;
+}

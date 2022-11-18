@@ -78,16 +78,11 @@ Variables:
         $discountPercent = $discount[$discountValue]['value'];
         $discountName = $discount[$discountValue]['name'];
 
-
-        echo $stationFrom;
-        echo $stationTo;
-        echo $tokenNumber;
-        echo $tokenWay;
-        echo $discountValue;
+        $stops = $stationTo - $stationFrom;
 
         ?>
 
-        <h2>Your trip</h2>
+        <h2 class="text-2xl">Your trip</h2>
         <p>
             <span class="material-icons">
                 arrow_forward
@@ -100,15 +95,12 @@ Variables:
         </p>
 
         <table class="receipt">
-            <tr>
-                <td>hi</td>
-            </tr>
             <?php
             $travelCost = $fares[$stationFrom][$stationTo];
             if ($travelCost == 0) {
                 echo "<tr>It's too close!</tr>";
             } else {
-                echo "<tr><td>" . $stations[$stationFrom] . " <-> " . $stations[$stationTo] . " </td><td></td><td>" . $travelCost . "</td></tr>";
+                echo "<tr><td>" . $stops . " stops </td><td></td><td>" . $travelCost . "</td></tr>";
                 if ($tokenWay == 1) {
                     $total = $fares[$stationFrom][$stationTo];
                     echo "<tr><td>One way</td><td> x1</td><td>" . $total . "</td></tr>";
@@ -116,44 +108,45 @@ Variables:
                     $total = $fares[$stationFrom][$stationTo] * 2;
                     echo "<tr><td>Return</td><td>x2</td><td>" . $total . "</td></tr>";
                 }
-                if ($discountPercent != 1) {
-                    $total = $total * $discountPercent;
-                    echo "<tr><td>" . $discountName . " discount </td><td>" . $discountPercent * 100 . "%</td><td>" . $total . "</td></tr>";
-                }
                 if ($tokenNumber != 1) {
                     $total = $total * $tokenNumber;
-                    echo "<tr><td>Number of trips</td><td> x" . $tokenNumber . "</td><td> " . $total . "</td></tr>";
+                    echo "<tr><td>" . $tokenNumber . " trips</td><td> x" . $tokenNumber . "</td><td> " . $total . "</td></tr>";
+                }
+                if ($discountPercent != 1) {
+                    $total = $total * (1 - $discountPercent);
+                    echo "<tr><td>" . $discountName . " discount </td><td>-" . $discountPercent * 100 . "%</td><td>" . $total . "</td></tr>";
                 }
                 echo "<tr class='primary-color text-2xl '><td><p >Your total is </p></td><td></td><td>RM" . $total . "</td></tr>";
             }
             ?>
         </table>
 
-
-        <?php
-        $travelCost = $fares[$stationFrom][$stationTo];
-        if ($travelCost == 0) {
-            echo "It's too close!";
-        } else {
-            echo $stations[$stationFrom] . " <-> " . $stations[$stationTo] . " " . $travelCost . "<br>";
-            if ($tokenWay == 1) {
-                $total = $fares[$stationFrom][$stationTo];
-                echo "One way x1" . "<br>";
+        <div hidden>
+            <?php
+            $travelCost = $fares[$stationFrom][$stationTo];
+            if ($travelCost == 0) {
+                echo "It's too close!";
             } else {
-                $total = $fares[$stationFrom][$stationTo] * 2;
-                echo "Return x2 " . $total . "<br>";
+                echo $stations[$stationFrom] . " <-> " . $stations[$stationTo] . " " . $travelCost . "<br>";
+                if ($tokenWay == 1) {
+                    $total = $fares[$stationFrom][$stationTo];
+                    echo "One way x1" . "<br>";
+                } else {
+                    $total = $fares[$stationFrom][$stationTo] * 2;
+                    echo "Return x2 " . $total . "<br>";
+                }
+                if ($discountPercent != 1) {
+                    $total = $total * $discountPercent;
+                    echo "" . $discountName . " discount " . $discountPercent * 100 . "% " . $total . "<br>";
+                }
+                if ($tokenNumber != 1) {
+                    $total = $total * $tokenNumber;
+                    echo "Number of trips x" . $tokenNumber . " " . $total . "<br>";
+                }
+                echo "<p class='primary-color text-2xl '>Your total is RM" . $total . "</p>";
             }
-            if ($discountPercent != 1) {
-                $total = $total * $discountPercent;
-                echo "" . $discountName . " discount " . $discountPercent * 100 . "% " . $total . "<br>";
-            }
-            if ($tokenNumber != 1) {
-                $total = $total * $tokenNumber;
-                echo "Number of trips x" . $tokenNumber . " " . $total . "<br>";
-            }
-            echo "<p class='primary-color text-2xl '>Your total is RM" . $total . "</p>";
-        }
-        ?>
+            ?>
+        </div>
     </section>
 </body>
 
