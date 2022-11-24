@@ -15,10 +15,13 @@
 </head>
 
 
-<body>
+<body class="dark">
 
 
     <section class="max-w-sm m-auto">
+        <?php
+        include "result/menu.php";
+        ?>
         <br /><br />
         <h1 class="text-4xl">
             <span class="material-icons bigIcon">
@@ -218,20 +221,9 @@
             </p>
         </details>
 
+        <button onclick="toggleDark()">dark mode</button>
 
-        <div class="wrapper d-flex" style="zoom:0.8;">
-            <div class="custom-control custom-radio iconSelect mr-2">
-                <input type="radio" id="lang1" name="lang" value="en" class="custom-control-input" checked>
-                <label class="custom-control-label" for="lang1">
-                    <span class="labelToggle">EN</span></label>
-            </div>
 
-            <div class="custom-control custom-radio iconSelect ">
-                <input type="radio" id="lang2" name="lang" value="ml" class="custom-control-input">
-                <label class="custom-control-label" for="lang2">
-                    <span class="labelToggle">ML</span></label>
-            </div>
-        </div>
         <br />
         <br />
         <br /><br />
@@ -254,6 +246,13 @@
 
     </section>
 
+    <script>
+        function toggleDark() {
+            document.body.classList.toggle("dark");
+        }
+        //document.body.classList.toggle("dark");
+        console.log(window.matchMedia("(prefers-color-scheme: dark)").matches);
+    </script>
 </body>
 
 </html>

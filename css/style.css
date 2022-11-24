@@ -1,11 +1,19 @@
 body {
-    --primary: #80bd01;
-    --padding: 5px;
-        --borderRadius: 5px;
-    
-        font-family: Josefin Sans, sans-serif;
+    font-family: Josefin Sans, sans-serif;
         font-size: 0.85em;
+    --primary: #80bd01;
+    --dark-bg: #232526;
+    --padding: 5px;
+    --borderRadius: 5px;
 }
+
+.dark {
+    background-color: var(--dark-bg);
+    /*
+    background: linear-gradient(to right, #dce35b, #45b649);
+    */
+}
+
 
 
 .primary-bg {
@@ -40,7 +48,6 @@ body {
 
 span.material-icons,
 i.material-icons {
-    display: ;
     font-size: 1rem;
     vertical-align: -3px;
     margin-right: 0.3em;
@@ -100,4 +107,11 @@ table.receipt {
 table.receipt td:nth-last-child(3n+1) {
     padding: 3px 10px;
     text-align: right;
+}
+@media (prefers-color-scheme:dark) {
+    body {
+        /*
+        background-color: darkslategrey;
+        color: white;
+    }
 }

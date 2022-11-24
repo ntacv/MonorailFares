@@ -2,7 +2,7 @@
     width: fit-content;
     background: lightgrey;
     padding: var(--padding);
-        border-radius: calc(3px + var(--borderRadius));
+    border-radius: calc(3px + var(--borderRadius));
     display: flex;
     margin-top: 0.5em;
 }
@@ -58,3 +58,7 @@
 .labelToggle {
     vertical-align: -3px;
 }
+/*
+rgb(59, 63, 65)
+var(--darkreader-bg--primary)
+rgb(45, 47, 49)

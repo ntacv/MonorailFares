@@ -1,0 +1,10 @@
+.container {
+    position: absolute;
+
+}
+
+.details {
+    background: red;
+    width: fit-content;
+    height: fit-content;
+}
