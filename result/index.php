@@ -19,9 +19,6 @@
 
 
     <section class="max-w-sm m-auto">
-        <?php
-        include "menu.php";
-        ?>
         <br /><br />
         <h1 class="text-4xl">
             <span class="material-icons bigIcon">

@@ -15,13 +15,10 @@
 </head>
 
 
-<body class="dark">
+<body>
 
 
     <section class="max-w-sm m-auto">
-        <?php
-        include "result/menu.php";
-        ?>
         <br /><br />
         <h1 class="text-4xl">
             <span class="material-icons bigIcon">
@@ -221,38 +218,9 @@
             </p>
         </details>
 
-        <button onclick="toggleDark()">dark mode</button>
-
-
-        <br />
-        <br />
-        <br /><br />
-        <br /><br />
-        <br /><br />
-        <br /><br />
-        <br />
-
-
-        <svg width="48" height="48" xmlns="http://www.w3.org/2000/svg">
-
-            <g>
-                <title>Layer 1</title>
-                <path id="svg_1" d="m20.55861,41.04329q-4.05,0 -6.925,-2.85t-2.875,-6.95q0,-3 1.875,-5.775q1.875,-2.775 5.425,-3.675l0,3.3q-2.05,0.7 -3.175,2.5t-1.125,3.65q0,2.85 1.975,4.825t4.825,1.975q3,0 5.025,-2.35q2.025,-2.35 1.475,-5.65l3,0q0.65,4.25 -2.275,7.625t-7.225,3.375zm15.7,-4.3l-5.55,-8.2l-11.15,0l0,-15l3,0l0,12l9.85,0l6.35,9.55l-2.5,1.65z" />
-                <ellipse ry="3.1151" rx="3.1151" id="svg_2" cy="9.21014" cx="21.02571" />
-                <ellipse ry="0.36959" rx="0.26399" id="svg_3" cy="8.47096" cx="21.76489" />
-            </g>
-        </svg>
-
 
     </section>
 
-    <script>
-        function toggleDark() {
-            document.body.classList.toggle("dark");
-        }
-        //document.body.classList.toggle("dark");
-        console.log(window.matchMedia("(prefers-color-scheme: dark)").matches);
-    </script>
 </body>
 
 </html>
