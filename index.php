@@ -65,8 +65,38 @@
 
         ?>
 
+        <br />
+        <?php
+        if (isset($_POST['submit'])) {
+            echo "<h3>Hello !</h3>";
+        } else {
+        ?>
 
+            <span class="loginbtn" onclick="document.querySelector('.loginform').style.display = 'block';">
+                <span class="material-icons">
+                    person
+                </span>Log in
+            </span>
+            <span class="loginbtn" onclick="document.querySelector('.signupform').style.display = 'block';">
+                <span class="material-icons">
+                    person_add
+                </span>Sign up
+            </span>
 
+            <form action="" method="POST" class="loginform none">
+                <br>
+                <input type="text" name="user_id" placeholder="User ID" required />
+                <input type="submit" value="Log in" class="primary-bg" />
+            </form>
+
+            <form action="" method="POST" class="signupform none">
+                <br>
+                <input type="text" name="name" placeholder="Your name" required />
+                <input type="submit" value="Sign up" class="primary-bg" />
+            </form>
+        <?php
+        }
+        ?>
 
         <form action="result" method="get">
             <br />
@@ -217,8 +247,9 @@
             </table>
             </p>
         </details>
-
-
+        <br />
+        <a class="loginbtn" href="all">All transactions</a>
+        <br />
     </section>
 
 </body>
