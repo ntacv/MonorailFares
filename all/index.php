@@ -25,8 +25,10 @@
                 directions_railway
             </span>All transactions
         </h1>
-        <p>This page is for admin user</p>
-
+        <p>This page is for admin users</p>
+        <br>
+        <a class="loginbtn" href="./">Home</a>
+        <br>
         <br>
         <form action="" method="get">
             <input type="text" name="search_input" placeholder="Search...">
@@ -45,48 +47,75 @@
 
         <?php
 
-        if (isset($message)) {
-            echo $message . "<br><br>";
-            // Creating database connection
-            $conn = new mysqli('localhost', 'root', '', 'monorail_fares');
+        // Creating database connection
+        $conn = new mysqli('localhost', 'root', '', 'monorail_fares');
 
-            // Check connection
-            if ($conn == false) {
-                die("ERROR: Connection failed: " . $conn->connect_error);
-            }
-
-            //echo "Connection: " . $conn;
-
-            // SQL command
-            $sql = "SELECT * FROM students WHERE student_name LIKE '%$input%'";
-
-            if ($result = $conn->query($sql)) {
-                if ($result->num_rows > 0) {
-                    echo "<table>";
-                    echo "<tr>";
-                    echo "<th>id</th>";
-                    echo "<th>name</th>";
-                    echo "<th>email</th>";
-                    echo "<th>birthdate</th>";
-                    echo "</tr>";
-                    while ($row = $result->fetch_array()) {
-                        echo "<tr>";
-                        echo "<td>" . $row['student_id'] . "</td>";
-                        echo "<td>" . $row['student_name'] . "</td>";
-                        echo "<td>" . $row['email'] . "</td>";
-                        echo "<td>" . $row['date_of_birth'] . "</td>";
-                        echo "</tr>";
-                    }
-                    echo "</table>";
-                    // Free result set
-                    $result->free();
-                } else {
-                    echo "No records matching your query were found.";
-                }
-            }
-            // Close connection
-            $conn->close();
+        // Check connection
+        if ($conn == false) {
+            die("ERROR: Connection failed: " . $conn->connect_error);
         }
+
+
+        $sql = "SELECT * FROM users";
+        if ($result = $conn->query($sql)) {
+            echo "<h1>Users</h1>";
+            while ($row = $result->fetch_array()) {
+                print_r($row);
+                echo "<br>";
+                //$result->free();
+            }
+        }
+        echo "<br>";
+
+        $sql = "SELECT * FROM transactions";
+        if ($result = $conn->query($sql)) {
+            echo "<h1>Transactions</h1>";
+            while ($row = $result->fetch_array()) {
+                print_r($row);
+                echo "<br>";
+                //$result->free();
+            }
+        }
+        echo "<br>";
+
+        $sql = "SELECT * FROM orders";
+        if ($result = $conn->query($sql)) {
+            echo "<h1>Orders</h1>";
+            while ($row = $result->fetch_array()) {
+                print_r($row);
+                echo "<br>";
+                //$result->free();
+            }
+        }
+        echo "<br>";
+
+        // SQL command
+        $sql = "SELECT * FROM orders"; //WHERE users.name LIKE '%$input%'";
+
+        if ($result = $conn->query($sql)) {
+            if ($result->num_rows > 0) {
+                echo "<table>";
+                echo "<tr>";
+                echo "<th>id</th>";
+                echo "<th>name</th>";
+                echo "<th>email</th>";
+                echo "<th>birthdate</th>";
+                echo "</tr>";
+                while ($row = $result->fetch_array()) {
+                    echo "<tr>";
+                    echo "<td>" . $row['order_id'] . "</td>";
+                    echo "</tr>";
+                }
+                echo "</table>";
+                // Free result set
+                $result->free();
+            } else {
+                echo "No records matching your query were found.";
+            }
+        }
+        // Close connection
+        $conn->close();
+
         ?>
 
     </section>
