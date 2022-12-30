@@ -69,50 +69,47 @@ session_start();
 
 
 
-
-
         <br />
-
         <?php
         //log out from the session and refresh the page
         if (isset($_REQUEST['logout'])) {
             session_destroy();
-            header("Location: index.php");
+            header("Location: /");
         }
 
-
-        //
-        if (isset($_POST['name'])) {
-            $_SESSION['name'] = $_POST['name'];
-            $name = $_SESSION["name"];
+        //log in function
+        if (isset($_POST['user_id'])) {
+            $_SESSION['user_id'] = $_POST['user_id'];
+            $id = $_SESSION["user_id"];
+            $_SESSION['user_name'] = $_POST['user_name'];
+            $name = $_SESSION["user_name"];
 
             // Creating database connection
             $conn = new mysqli("localhost", "root", "", "monorail_fares");
 
             // Checking connection
-            if (
-                $conn == false
-            ) {
+            if ($conn == false) {
                 die("ERROR: Could not connect. " . $conn->connect_error);
             }
 
-            $sql = "INSERT INTO users (name) VALUES ('$name')";
+            $sql = "SELECT name FROM users WHERE user_id = $id";
 
             if ($conn->query($sql) == true) {
-                $last_id = $conn->insert_id;
-                //echo "<h3>Hello " . $name . "!</h3>";
+                $result = $conn->query($sql);
+                $row = $result->fetch_assoc();
+                if ($row['name'] == $name) {
+                    //echo "Welcome back " . $name . "! User id is " . $id;
+                    //header("Location: pages/form/");
+                }
             } else {
                 echo "ERROR: Could not able to execute $sql . " . $conn->error;
             }
-
-            // Close connection
-            $conn->close();
         }
 
 
         //check if session is set
-        if (isset($_SESSION['name'])) {
-            echo "<h3>Hello " . $_SESSION['name'] . "! Your user ID is: $last_id</h3>
+        if (isset($_SESSION['user_name'])) {
+            echo "<h3>Hello <span class='primary-color'>" . $name . "</span>! Your user ID is: <span class='primary-color'>$id</span></h3>
             <h3>You will need you user id to connect again. </h3>";
         ?>
             <form action="">
@@ -121,10 +118,10 @@ session_start();
             <br>
         <?php
         } else {
-            echo "<h3>no session, try to connect</h3>";
+            echo "<h3>no session, try to connect</h3><br>";
         }
         ?>
-        <a href="form">
+        <a href="pages/form">
             <span class="loginbtn">
                 <span class="material-icons">
                     attach_money
@@ -136,12 +133,13 @@ session_start();
                 person
             </span>Log in
         </span>
-        <span class="loginbtn" onclick="document.querySelector('.signupform').style.display = 'block';">
-            <span class="material-icons">
-                person_add
-            </span>Sign up
-        </span>
-
+        <a href="pages/signup">
+            <span class="loginbtn">
+                <span class="material-icons">
+                    person_add
+                </span>Sign up
+            </span>
+        </a>
 
         <form action="" method="POST" class="loginform none">
             <br>
@@ -150,16 +148,10 @@ session_start();
             <input type="submit" value="Log in" class="primary-bg" />
         </form>
 
-        <form action="" method="POST" class="signupform none">
-            <br>
-            <input type="text" name="name" placeholder="Your name" required />
-            <input type="submit" value="Sign up" class="primary-bg" />
-        </form>
-
 
         <br />
         <br />
-        <details open>
+        <details>
             <summary>Show fule fares</summary>
             <p><br />
             <table class="chart">
@@ -202,7 +194,7 @@ session_start();
             </p>
         </details>
         <br />
-        <a class="loginbtn" href="all">All transactions</a>
+        <a class="loginbtn" href="pages/all">All transactions</a>
         <br />
         <br />
     </section>

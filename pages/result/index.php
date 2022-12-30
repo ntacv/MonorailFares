@@ -4,8 +4,8 @@
 <head>
     <title>KL Monorail Fares</title>
 
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/toggleButton.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/toggleButton.css">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -26,6 +26,9 @@
             </span>KL Monorail fares
         </h1>
 
+        <br>
+        <a class="loginbtn" href="../">Home</a>
+        <br>
         <!-- 
 Variables: 
     ARRAYS
@@ -81,7 +84,7 @@ Variables:
         $stops = $stationTo - $stationFrom;
 
         ?>
-
+        <br>
         <h2 class="text-2xl">Your trip</h2>
         <p>
             <span class="material-icons">
@@ -93,7 +96,7 @@ Variables:
             </span>
             <?php echo $stations[$stationTo]; ?>
         </p>
-
+        <br>
         <table class="receipt">
             <?php
             $travelCost = $fares[$stationFrom][$stationTo];
@@ -121,32 +124,6 @@ Variables:
             ?>
         </table>
 
-        <div hidden>
-            <?php
-            $travelCost = $fares[$stationFrom][$stationTo];
-            if ($travelCost == 0) {
-                echo "It's too close!";
-            } else {
-                echo $stations[$stationFrom] . " <-> " . $stations[$stationTo] . " " . $travelCost . "<br>";
-                if ($tokenWay == 1) {
-                    $total = $fares[$stationFrom][$stationTo];
-                    echo "One way x1" . "<br>";
-                } else {
-                    $total = $fares[$stationFrom][$stationTo] * 2;
-                    echo "Return x2 " . $total . "<br>";
-                }
-                if ($discountPercent != 1) {
-                    $total = $total * $discountPercent;
-                    echo "" . $discountName . " discount " . $discountPercent * 100 . "% " . $total . "<br>";
-                }
-                if ($tokenNumber != 1) {
-                    $total = $total * $tokenNumber;
-                    echo "Number of trips x" . $tokenNumber . " " . $total . "<br>";
-                }
-                echo "<p class='primary-color text-2xl '>Your total is RM" . $total . "</p>";
-            }
-            ?>
-        </div>
     </section>
 </body>
 

@@ -4,8 +4,8 @@
 <head>
     <title>KL Monorail Fares</title>
 
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/toggleButton.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/toggleButton.css">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -27,7 +27,7 @@
         </h1>
 
         <br>
-        <a class="loginbtn" href="./">Home</a>
+        <a class="loginbtn" href="../">Home</a>
         <!-- 
             Variables: 
                 ARRAYS
@@ -73,7 +73,7 @@
 
         <br />
 
-        <form action="result" method="get">
+        <form action="./result" method="get">
             <br />
             <h3>Configure your trip</h3>
 
