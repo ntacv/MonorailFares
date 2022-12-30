@@ -74,7 +74,7 @@ session_start();
         //log out from the session and refresh the page
         if (isset($_REQUEST['logout'])) {
             session_destroy();
-            header("Location: /");
+            header("Location: ./");
         }
 
         //log in function
@@ -92,11 +92,23 @@ session_start();
                 die("ERROR: Could not connect. " . $conn->connect_error);
             }
 
+            $sql = "SELECT max(user_id) FROM users";
+
+            if ($conn->query($sql) == true) {
+                $result = $conn->query($sql);
+                $row = $result->fetch_assoc();
+                echo "row " . print_r($row);
+            } else {
+                echo "ERROR: Could not able to execute $sql . " . $conn->error;
+            }
+            echo "<br><br>";
+
             $sql = "SELECT name FROM users WHERE user_id = $id";
 
             if ($conn->query($sql) == true) {
                 $result = $conn->query($sql);
                 $row = $result->fetch_assoc();
+                echo "row " . print_r($row);
                 if ($row['name'] == $name) {
                     //echo "Welcome back " . $name . "! User id is " . $id;
                     //header("Location: pages/form/");
@@ -109,10 +121,10 @@ session_start();
 
         //check if session is set
         if (isset($_SESSION['user_name'])) {
-            echo "<h3>Hello <span class='primary-color'>" . $name . "</span>! Your user ID is: <span class='primary-color'>$id</span></h3>
+            echo "<h3>Hello <span class='primary-color'>" . $_SESSION['user_name'] . "</span>! Your user ID is: <span class='primary-color'>" . $_SESSION['user_id'] . "</span></h3>
             <h3>You will need you user id to connect again. </h3>";
         ?>
-            <form action="">
+            <form action="" method="post">
                 <input type="submit" name="logout" value="Log out" class="primary-bg" />
             </form>
             <br>
@@ -143,7 +155,7 @@ session_start();
 
         <form action="" method="POST" class="loginform none">
             <br>
-            <input type="text" name="user_id" placeholder="User ID" required />
+            <input type="number" name="user_id" placeholder="User ID" required />
             <input type="text" name="user_name" placeholder="Username" required />
             <input type="submit" value="Log in" class="primary-bg" />
         </form>
@@ -193,6 +205,10 @@ session_start();
             </table>
             </p>
         </details>
+
+        <?php
+        include "includes/menu.php";
+        ?>
         <br />
         <a class="loginbtn" href="pages/all">All transactions</a>
         <br />

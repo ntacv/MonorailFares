@@ -19,31 +19,23 @@ CREATE TABLE users (
     PRIMARY KEY (user_id)
 );
 
--- Table: transactions
-CREATE TABLE transactions (
-    transaction_id int NOT NULL AUTO_INCREMENT,
-    date timestamp NOT NULL,
-    user_id int NOT NULL,
-    PRIMARY KEY (transaction_id),
-    CONSTRAINT user_id FOREIGN KEY (user_id) REFERENCES users(user_id)
-);
-
 
 -- Table: orders
 CREATE TABLE orders (
     order_id int NOT NULL AUTO_INCREMENT,
     discount_id int NOT NULL,
+    user_id int NOT NULL,
+    date timestamp NOT NULL,
     station_from int NOT NULL,
     station_to int NOT NULL,
-    transaction_id int NOT NULL,
     price float NOT NULL,
     number int NOT NULL,
     way int NOT NULL,
     PRIMARY KEY (order_id),
     CONSTRAINT discount_id FOREIGN KEY (discount_id) REFERENCES discounts(discount_id),
+    CONSTRAINT user_id FOREIGN KEY (user_id) REFERENCES users(user_id),
     CONSTRAINT station_from FOREIGN KEY (station_from) REFERENCES stations(station_id),
-    CONSTRAINT station_to FOREIGN KEY (station_to) REFERENCES stations(station_id),
-    CONSTRAINT transaction_id FOREIGN KEY (transaction_id) REFERENCES transactions(transaction_id)
+    CONSTRAINT station_to FOREIGN KEY (station_to) REFERENCES stations(station_id)
 );
 
 

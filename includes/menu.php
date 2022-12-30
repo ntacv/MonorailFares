@@ -15,6 +15,28 @@
 
 <body>
     <section class="max-w-sm m-auto">
+
+        <a class="loginbtn" href="../">Home</a>
+
+        <a href="pages/form">
+            <span class="loginbtn">
+                <span class="material-icons">
+                    attach_money
+                </span>Simulate
+            </span>
+        </a>
+        <span class="loginbtn" onclick="document.querySelector('.loginform').style.display = 'block';">
+            <span class="material-icons">
+                person
+            </span>Log in
+        </span>
+        <a href="pages/signup">
+            <span class="loginbtn">
+                <span class="material-icons">
+                    person_add
+                </span>Sign up
+            </span>
+        </a>
         <div class="container">
             <details>
                 <summary>menu</summary>

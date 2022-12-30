@@ -1,6 +1,6 @@
 .container {
     position: absolute;
-
+    display: inline;
 }
 
 .details {

@@ -67,16 +67,6 @@
         }
         echo "<br>";
 
-        $sql = "SELECT * FROM transactions";
-        if ($result = $conn->query($sql)) {
-            echo "<h1>Transactions</h1>";
-            while ($row = $result->fetch_array()) {
-                print_r($row);
-                echo "<br>";
-                //$result->free();
-            }
-        }
-        echo "<br>";
 
         $sql = "SELECT * FROM orders";
         if ($result = $conn->query($sql)) {
