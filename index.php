@@ -1,5 +1,7 @@
 <?php
 session_start();
+
+$page = "main";
 ?>
 <!DOCTYPE html>
 <html>
@@ -20,6 +22,56 @@ session_start();
 
 <body>
 
+    <?php
+    //log in function
+    if (isset($_POST['user_id'])) {
+        $_SESSION['user_id'] = $_POST['user_id'];
+        $id = $_SESSION["user_id"];
+        $_SESSION['user_name'] = $_POST['user_name'];
+        $name = $_SESSION["user_name"];
+
+        // Creating database connection
+        $conn = new mysqli("localhost", "root", "", "monorail_fares");
+
+        // Checking connection
+        if ($conn == false) {
+            die("ERROR: Could not connect. " . $conn->connect_error);
+        }
+        $id_int  = (int)$id;
+
+        $sql = "SELECT user_id FROM users WHERE user_id = '$id'";
+
+        if ($conn->query($sql) == true) {
+            $result = $conn->query($sql);
+            $row = $result->fetch_assoc();
+            if ($row != null) {
+                echo "Welcome back " . $name . "! User id is " . $id;
+                //header("Location: pages/form/");
+            } else {
+                echo "different";
+            }
+        } else {
+            echo "ERROR";
+        }
+        echo "<br><br>";
+
+        $sql = "SELECT name FROM users WHERE user_id = $id";
+
+        if ($conn->query($sql) == true) {
+            $result = $conn->query($sql);
+            $row = $result->fetch_assoc();
+            //echo "row " . print_r($row);
+            if ($row['name'] == $name) {
+                //echo "Welcome back " . $name . "! User id is " . $id;
+                //header("Location: pages/form/");
+            }
+        } else {
+            echo "ERROR: Could not able to execute $sql . " . $conn->error;
+        }
+    }
+
+
+    ?>
 
     <section class="max-w-sm m-auto">
         <br /><br />
@@ -30,6 +82,10 @@ session_start();
         </h1>
 
 
+        <?php
+        include_menu:
+        include "includes/menu.php";
+        ?>
         <!-- 
             Variables: 
                 ARRAYS
@@ -71,87 +127,15 @@ session_start();
 
         <br />
         <?php
-        //log out from the session and refresh the page
-        if (isset($_REQUEST['logout'])) {
-            session_destroy();
-            header("Location: ./");
-        }
-
-        //log in function
-        if (isset($_POST['user_id'])) {
-            $_SESSION['user_id'] = $_POST['user_id'];
-            $id = $_SESSION["user_id"];
-            $_SESSION['user_name'] = $_POST['user_name'];
-            $name = $_SESSION["user_name"];
-
-            // Creating database connection
-            $conn = new mysqli("localhost", "root", "", "monorail_fares");
-
-            // Checking connection
-            if ($conn == false) {
-                die("ERROR: Could not connect. " . $conn->connect_error);
-            }
-
-            $sql = "SELECT max(user_id) FROM users";
-
-            if ($conn->query($sql) == true) {
-                $result = $conn->query($sql);
-                $row = $result->fetch_assoc();
-                echo "row " . print_r($row);
-            } else {
-                echo "ERROR: Could not able to execute $sql . " . $conn->error;
-            }
-            echo "<br><br>";
-
-            $sql = "SELECT name FROM users WHERE user_id = $id";
-
-            if ($conn->query($sql) == true) {
-                $result = $conn->query($sql);
-                $row = $result->fetch_assoc();
-                echo "row " . print_r($row);
-                if ($row['name'] == $name) {
-                    //echo "Welcome back " . $name . "! User id is " . $id;
-                    //header("Location: pages/form/");
-                }
-            } else {
-                echo "ERROR: Could not able to execute $sql . " . $conn->error;
-            }
-        }
-
 
         //check if session is set
         if (isset($_SESSION['user_name'])) {
             echo "<h3>Hello <span class='primary-color'>" . $_SESSION['user_name'] . "</span>! Your user ID is: <span class='primary-color'>" . $_SESSION['user_id'] . "</span></h3>
             <h3>You will need you user id to connect again. </h3>";
-        ?>
-            <form action="" method="post">
-                <input type="submit" name="logout" value="Log out" class="primary-bg" />
-            </form>
-            <br>
-        <?php
         } else {
             echo "<h3>no session, try to connect</h3><br>";
         }
         ?>
-        <a href="pages/form">
-            <span class="loginbtn">
-                <span class="material-icons">
-                    attach_money
-                </span>Simulate
-            </span>
-        </a>
-        <span class="loginbtn" onclick="document.querySelector('.loginform').style.display = 'block';">
-            <span class="material-icons">
-                person
-            </span>Log in
-        </span>
-        <a href="pages/signup">
-            <span class="loginbtn">
-                <span class="material-icons">
-                    person_add
-                </span>Sign up
-            </span>
-        </a>
 
         <form action="" method="POST" class="loginform none">
             <br>
@@ -164,7 +148,7 @@ session_start();
         <br />
         <br />
         <details>
-            <summary>Show fule fares</summary>
+            <summary>Show full fares</summary>
             <p><br />
             <table class="chart">
                 <tr>
@@ -206,11 +190,12 @@ session_start();
             </p>
         </details>
 
-        <?php
-        include "includes/menu.php";
-        ?>
         <br />
-        <a class="loginbtn" href="pages/all">All transactions</a>
+        <a class="loginbtn" href="pages/all">
+            <span class="material-icons">
+                clear_all
+            </span>
+            All transactions</a>
         <br />
         <br />
     </section>

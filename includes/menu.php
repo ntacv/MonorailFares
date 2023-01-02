@@ -16,7 +16,11 @@
 <body>
     <section class="max-w-sm m-auto">
 
-        <a class="loginbtn" href="../">Home</a>
+        <a class="loginbtn" href="
+        <?php if (isset($page) && $page == "main") echo "";
+        else echo "../";
+        ?>
+        ">Home</a>
 
         <a href="pages/form">
             <span class="loginbtn">
@@ -25,18 +29,37 @@
                 </span>Simulate
             </span>
         </a>
-        <span class="loginbtn" onclick="document.querySelector('.loginform').style.display = 'block';">
-            <span class="material-icons">
-                person
-            </span>Log in
-        </span>
-        <a href="pages/signup">
-            <span class="loginbtn">
+        <?php
+        if (isset($_SESSION["user_id"])) {
+        ?>
+            <a href="includes/logout.php">
+                <span class="loginbtn">
+                    <span class="material-icons">
+                        directions_run
+                    </span>Log out
+                </span>
+            </a>
+
+        <?php
+        } else {
+        ?>
+
+            <span class="loginbtn" onclick="document.querySelector('.loginform').style.display = 'block';">
                 <span class="material-icons">
-                    person_add
-                </span>Sign up
+                    person
+                </span>Log in
             </span>
-        </a>
+
+            <a href="pages/signup">
+                <span class="loginbtn">
+                    <span class="material-icons">
+                        person_add
+                    </span>Sign up
+                </span>
+            </a>
+        <?php
+        }
+        ?>
         <div class="container">
             <details>
                 <summary>menu</summary>
