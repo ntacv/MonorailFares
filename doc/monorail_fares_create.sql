@@ -25,7 +25,7 @@ CREATE TABLE orders (
     order_id int NOT NULL AUTO_INCREMENT,
     discount_id int NOT NULL,
     user_id int NOT NULL,
-    date timestamp NOT NULL,
+    date datetime NOT NULL,
     station_from int NOT NULL,
     station_to int NOT NULL,
     price float NOT NULL,

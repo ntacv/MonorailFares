@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 
@@ -28,6 +31,12 @@
 
 
         <?php
+
+        if (!isset($_REQUEST['stationFrom']) || !isset($_REQUEST['stationTo']) || !isset($_REQUEST['tokenNumber']) || !isset($_REQUEST['tokenWay']) || !isset($_REQUEST['discountValue'])) {
+            header("Location: ./form");
+            exit();
+        }
+
         include "../../includes/menu.php";
         include "../../includes/fares.php";
 
@@ -89,7 +98,8 @@
 
         <?php
 
-        if (isset($_SESSION['user_id']) && isset($_SESSION['user_name'])) {
+        if (isset($_SESSION['user_id']) && isset($_SESSION['user_name']) && !isset($_REQUEST['user'])) {
+
             $id = $_SESSION['user_id'];
             $name = $_SESSION['user_name'];
 
@@ -107,7 +117,7 @@
 
             $now = date("Y-m-d H:i:s"); // 2001-03-10 17:16:18 (le format DATETIME de MySQL)
             // SQL command
-            $sql = "INSERT INTO orders (discount_id, user_id, date, station_from, station_to, price, number, way) VALUES ($discountValue, $id, $now, $stationFrom, $stationTo, $total, $tokenNumber, $tokenWay)";
+            $sql = "INSERT INTO orders (discount_id, user_id, date, station_from, station_to, price, number, way) VALUES ($discountValue, $id, now(), $stationFrom, $stationTo, $total, $tokenNumber, $tokenWay)";
 
             if ($result = $conn->query($sql)) {
                 echo "Inserted in the DB";

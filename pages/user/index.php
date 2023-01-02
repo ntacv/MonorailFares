@@ -1,9 +1,12 @@
 <?php
 session_start();
 
-//todo add list of order dates
-//todo embed result by include with get param
+
+//todo embed?? result by include with get param
 //todo add user funny picture
+
+$page = "user";
+$user = true;
 ?>
 
 <!DOCTYPE html>
@@ -64,7 +67,7 @@ session_start();
 
         <br>
         <br>
-        <h2>Your orders</h2>
+        <h2 class="text-2xl">Your orders</h2>
         <br>
         <?php
 
@@ -87,8 +90,8 @@ session_start();
 
                 echo "<table class=\"table-links\">";
                 echo "<tr>";
-                echo "<th>price</th>";
                 echo "<th>date of purchase</th>";
+                echo "<th>price</th>";
                 echo "</tr>";
                 while ($row = $result->fetch_array()) {
 
@@ -98,12 +101,17 @@ session_start();
                     $tokenNumber = $row['number'];
                     $discountValue = $row['discount_id'];
                     $price = $row['price'];
-                    $date = date($row['date']);
 
-                    echo "<tr onclick=\"window.location='./result?tokenWay=$tokenWay&stationFrom=$stationFrom&stationTo=$stationTo&tokenNumber=$tokenNumber&discountValue=$discountValue';\">";
+                    $date = strtotime($row['date']);
+                    $date = date("F jS Y h:i a", $date);
+                    //$date = new DateTime($row['date']);
+                    //$new_date = $date->format('d m Y H:i');
+                    //if ($new_date) echo $new_date;
+
+                    echo "<tr onclick=\"window.location='./result?tokenWay=$tokenWay&stationFrom=$stationFrom&stationTo=$stationTo&tokenNumber=$tokenNumber&discountValue=$discountValue&user';\">";
                     //?tokenWay=$tokenWay&stationFrom=$stationFrom&stationTo=$stationTo&tokenNumber=$tokenNumber&discountValue=$discountValue
-                    echo "<td>" . $row['price'] . "</td>";
                     echo "<td>" . $date . "</td>";
+                    echo "<td>RM " . $row['price'] . "</td>";
                     echo "</tr></a>";
                 }
                 echo "</table>";
