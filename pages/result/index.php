@@ -26,48 +26,10 @@
             </span>KL Monorail fares
         </h1>
 
-        <br>
-        <a class="loginbtn" href="../">Home</a>
-        <br>
-        <!-- 
-Variables: 
-    ARRAYS
-        $stations
-        $fares
-    OTHER
-        $stationFrom
-        $stationTo
-        $tokenNumber
-        $tokenWay
-        $discount
-        $total
 
-
-        show directions for the trip they do
--->
         <?php
-
-        $stations = array("KL Sentral", "Tun Sambanthan", "Maharajalela", "Hang Tuah", "Imbi", "Bukit Bintang", "Raja Chulan", "Bukit Nanas", "Medan Tuanku", "Chow Kit", "Titiwangsa");
-        $fares = array(
-            array(0, 1.20, 1.60, 1.60, 1.60, 2.10, 2.10, 2.10, 2.50, 2.50, 2.50),
-            array(1.20, 0, 1.20, 1.60, 1.60, 1.60, 2.10, 2.10, 2.10, 2.50, 2.50),
-            array(1.60, 1.20, 0, 1.20, 1.20, 1.60, 1.60, 1.60, 2.10, 2.10, 2.50),
-            array(1.60, 1.60, 1.20, 0, 1.20, 1.20, 1.20, 1.60, 1.60, 2.10, 2.10),
-            array(1.60, 1.60, 1.20, 1.20, 0, 1.20, 1.20, 1.60, 1.60, 1.60, 2.10),
-            array(2.10, 1.60, 1.60, 1.20, 1.20, 0, 1.20, 1.20, 1.60, 1.60, 2.10),
-            array(2.10, 2.10, 1.60, 1.20, 1.20, 1.20, 0, 1.20, 1.20, 1.60, 1.60),
-            array(2.10, 2.10, 1.60, 1.60, 1.60, 1.20, 1.20, 0, 1.20, 1.20, 1.60),
-            array(2.50, 2.10, 2.10, 1.60, 1.60, 1.60, 1.20, 1.20, 0, 1.20, 1.60),
-            array(2.50, 2.50, 2.10, 2.10, 1.60, 1.60, 1.60, 1.20, 1.20, 0, 1.20),
-            array(2.50, 2.50, 2.50, 2.10, 2.10, 2.10, 1.60, 1.60, 1.60, 1.20, 0)
-        );
-        $discount = array(
-            array("name" => "Adult", "value" => 1, "icon" => "groups"),
-            array("name" => "Senior", "value" => 0.25, "icon" => "elderly"),
-            array("name" => "Disabled", "value" => 0.40, "icon" => "accessible"),
-            array("name" => "Students", "value" => 0.30, "icon" => "school"),
-        );
-
+        include "../../includes/menu.php";
+        include "../../includes/fares.php";
 
 
         $stationFrom = $_REQUEST['stationFrom'];
@@ -84,7 +46,7 @@ Variables:
         $stops = $stationTo - $stationFrom;
 
         ?>
-        <br>
+
         <h2 class="text-2xl">Your trip</h2>
         <p>
             <span class="material-icons">
@@ -117,6 +79,7 @@ Variables:
                 }
                 if ($discountPercent != 1) {
                     $total = $total * (1 - $discountPercent);
+                    $total = round($total, 2);
                     echo "<tr><td>" . $discountName . " discount </td><td>-" . $discountPercent * 100 . "%</td><td>" . $total . "</td></tr>";
                 }
                 echo "<tr class='primary-color text-2xl '><td><p >Your total is </p></td><td></td><td>RM" . $total . "</td></tr>";
@@ -124,6 +87,41 @@ Variables:
             ?>
         </table>
 
+        <?php
+
+        if (isset($_SESSION['user_id']) && isset($_SESSION['user_name'])) {
+            $id = $_SESSION['user_id'];
+            $name = $_SESSION['user_name'];
+
+
+            //INSERT INTO orders (discount_id, user_id, date, station_from, station_to, price, number, way) VALUES (1, 1, '2023-01-01 19:00:00', 0, 5, 2.50, 1, 1);
+
+
+            // Creating database connection
+            $conn = new mysqli('localhost', 'root', '', 'monorail_fares');
+
+            // Check connection
+            if ($conn == false) {
+                die("ERROR: Connection failed: " . $conn->connect_error);
+            }
+
+            $now = date("Y-m-d H:i:s"); // 2001-03-10 17:16:18 (le format DATETIME de MySQL)
+            // SQL command
+            $sql = "INSERT INTO orders (discount_id, user_id, date, station_from, station_to, price, number, way) VALUES ($discountValue, $id, $now, $stationFrom, $stationTo, $total, $tokenNumber, $tokenWay)";
+
+            if ($result = $conn->query($sql)) {
+                echo "Inserted in the DB";
+            } else {
+                echo "No records matching your query were found.";
+            }
+
+            // Close connection
+            $conn->close();
+        }
+
+
+
+        ?>
     </section>
 </body>
 

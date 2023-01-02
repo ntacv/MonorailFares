@@ -15,51 +15,70 @@
 
 <body>
     <section class="max-w-sm m-auto">
-
-        <a class="loginbtn" href="
+        <div class="whitespace-nowrap">
+            <a class="loginbtn" href="
         <?php if (isset($page) && $page == "main") echo "";
-        else echo "../";
-        ?>
-        ">Home</a>
-
-        <a href="pages/form">
-            <span class="loginbtn">
+        else echo "../"; ?>
+        ">
                 <span class="material-icons">
-                    attach_money
-                </span>Simulate
-            </span>
-        </a>
-        <?php
-        if (isset($_SESSION["user_id"])) {
-        ?>
-            <a href="includes/logout.php">
+                    home
+                </span>Home</a>
+
+            <a href="<?php if (isset($page) && $page == "main") echo "";
+                        else echo "../"; ?>pages/form">
                 <span class="loginbtn">
                     <span class="material-icons">
-                        directions_run
-                    </span>Log out
+                        attach_money
+                    </span>Simulate
                 </span>
             </a>
+            <?php
+            if (isset($_SESSION["user_id"])) {
+            ?>
+                <a href="<?php if (isset($page) && $page == "main") echo "";
+                            else echo "../"; ?>includes/logout.php">
+                    <span class="loginbtn">
+                        <span class="material-icons">
+                            directions_run
+                        </span>Log out
+                    </span>
+                </a>
 
-        <?php
-        } else {
-        ?>
+                <a href="<?php if (isset($page) && $page == "main") echo "";
+                            else echo "../"; ?>pages/user">
+                    <span class="loginbtn">
+                        <span class="material-icons">
+                            person
+                        </span><?php
+                                echo $_SESSION['user_name'] . " " . $_SESSION['user_id'] ?>
+                    </span>
+                </a>
 
-            <span class="loginbtn" onclick="document.querySelector('.loginform').style.display = 'block';">
-                <span class="material-icons">
-                    person
-                </span>Log in
-            </span>
+            <?php
+            } else {
 
-            <a href="pages/signup">
-                <span class="loginbtn">
+                //onclick=\"document.querySelector('.loginform').style.display = 'block';\"
+            ?>
+
+                <span class="loginbtn" <?php if (isset($page) && $page == "main") echo "onclick=\"document.querySelector('.login_input_id').focus();\"";
+                                        else echo "onclick=\"window.location='../'\""; ?>>
                     <span class="material-icons">
-                        person_add
-                    </span>Sign up
+                        person
+                    </span>Log in
                 </span>
-            </a>
-        <?php
-        }
-        ?>
+
+                <a href="<?php if (isset($page) && $page == "main") echo "";
+                            else echo "../"; ?>pages/signup">
+                    <span class="loginbtn">
+                        <span class="material-icons">
+                            person_add
+                        </span>Sign up
+                    </span>
+                </a>
+            <?php
+            }
+            ?>
+        </div>
         <div class="container">
             <details>
                 <summary>menu</summary>
@@ -95,6 +114,8 @@
                 </p>
             </details>
         </div>
+
+
     </section>
 </body>
 

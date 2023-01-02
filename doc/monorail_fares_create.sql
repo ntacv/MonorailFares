@@ -55,3 +55,7 @@ INSERT INTO stations (station_id, station) VALUES (7, 'Bukit Nanas');
 INSERT INTO stations (station_id, station) VALUES (8, 'Medan Tuanku');
 INSERT INTO stations (station_id, station) VALUES (9, 'Chow Kit');
 INSERT INTO stations (station_id, station) VALUES (10, 'Titiwangsa');
+
+
+
+INSERT INTO orders (discount_id, user_id, date, station_from, station_to, price, number, way) VALUES (1, 1, '2023-01-01 19:00:00', 0, 5, 2.50, 1, 1);

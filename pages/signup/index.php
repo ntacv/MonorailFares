@@ -30,8 +30,9 @@ session_start();
         </h1>
 
         <br>
-        <a class="loginbtn" href="../">Home</a>
-        <br>
+        <?php
+        include "../../includes/menu.php";
+        ?>
 
         <br />
 
@@ -60,20 +61,6 @@ session_start();
             }
         }
         ?>
-        <a href="form">
-            <span class="loginbtn">
-                <span class="material-icons">
-                    attach_money
-                </span>Simulate
-            </span>
-        </a>
-        <a href="../">
-            <span class="loginbtn">
-                <span class="material-icons">
-                    person
-                </span>Log in
-            </span>
-        </a>
 
         <form action="" method="POST" class="signupform">
             <br>

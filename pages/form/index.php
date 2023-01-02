@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 
@@ -16,7 +19,20 @@
 
 
 <body>
+    <?php
+    //log in function
+    if (isset($_SESSION['user_id']) && isset($_SESSION['user_name'])) {
+        $id = $_SESSION['user_id'];
+        $name = $_SESSION['user_name'];
 
+        echo "Welcome back " . $name . "! User id is " . $id . "<br>";
+        echo "Your order will be saved under this user id.";
+    } else {
+        echo "you are not logged in.";
+    }
+
+
+    ?>
 
     <section class="max-w-sm m-auto">
         <br /><br />
@@ -27,42 +43,12 @@
         </h1>
 
         <br>
-        <a class="loginbtn" href="../">Home</a>
-        <!-- 
-            Variables: 
-                ARRAYS
-                    $stations
-                    $fares
-                OTHER
-                    $stationFrom
-                    $stationTo
-                    $tokenNumber
-                    $tokenWay
-                    $discount
-                    $total
-        -->
         <?php
+        include "../../includes/menu.php";
+        ?>
+        <?php
+        include "../../includes/fares.php";
 
-        $stations = array("KL Sentral", "Tun Sambanthan", "Maharajalela", "Hang Tuah", "Imbi", "Bukit Bintang", "Raja Chulan", "Bukit Nanas", "Medan Tuanku", "Chow Kit", "Titiwangsa");
-        $fares = array(
-            array(0, 1.20, 1.60, 1.60, 1.60, 2.10, 2.10, 2.10, 2.50, 2.50, 2.50),
-            array(1.20, 0, 1.20, 1.60, 1.60, 1.60, 2.10, 2.10, 2.10, 2.50, 2.50),
-            array(1.60, 1.20, 0, 1.20, 1.20, 1.60, 1.60, 1.60, 2.10, 2.10, 2.50),
-            array(1.60, 1.60, 1.20, 0, 1.20, 1.20, 1.20, 1.60, 1.60, 2.10, 2.10),
-            array(1.60, 1.60, 1.20, 1.20, 0, 1.20, 1.20, 1.60, 1.60, 1.60, 2.10),
-            array(2.10, 1.60, 1.60, 1.20, 1.20, 0, 1.20, 1.20, 1.60, 1.60, 2.10),
-            array(2.10, 2.10, 1.60, 1.20, 1.20, 1.20, 0, 1.20, 1.20, 1.60, 1.60),
-            array(2.10, 2.10, 1.60, 1.60, 1.60, 1.20, 1.20, 0, 1.20, 1.20, 1.60),
-            array(2.50, 2.10, 2.10, 1.60, 1.60, 1.60, 1.20, 1.20, 0, 1.20, 1.60),
-            array(2.50, 2.50, 2.10, 2.10, 1.60, 1.60, 1.60, 1.20, 1.20, 0, 1.20),
-            array(2.50, 2.50, 2.50, 2.10, 2.10, 2.10, 1.60, 1.60, 1.60, 1.20, 0)
-        );
-        $discount = array(
-            array("name" => "Adult", "value" => 1, "icon" => "groups"),
-            array("name" => "Senior", "value" => 0.25, "icon" => "elderly"),
-            array("name" => "Disabled", "value" => 0.40, "icon" => "accessible"),
-            array("name" => "Students", "value" => 0.30, "icon" => "school"),
-        );
 
         if (isset($_post['user_id'])) {
             $user_id = $_post['user_id'];
@@ -71,10 +57,7 @@
 
         ?>
 
-        <br />
-
-        <form action="./result" method="get">
-            <br />
+        <form action="./result" method="post">
             <h3>Configure your trip</h3>
 
             <div class="wrapper d-flex">
@@ -178,52 +161,6 @@
             <input type="submit" value="Submit" class="primary-bg" />
         </form>
 
-
-        <br />
-        <details>
-            <summary>Show fule fares</summary>
-            <p><br />
-            <table class="chart">
-                <tr>
-                    <th>From \ To</th>
-                    <?php
-                    for ($i = 0; $i < count($stations); $i++) {
-                        echo "<td>" . $stations[$i] . "</td>";
-                    }
-                    ?>
-                </tr>
-
-                <?php
-                for ($rows = 0; $rows < count($fares); $rows++) {
-                    echo "<tr>";
-                    echo "<td>" . $stations[$rows] . "</td>";
-                    for ($col = 0; $col < count($fares[$rows]); $col++) {
-                        echo "<td class=' ";
-
-                        if ($fares[$rows][$col] == 2.50) {
-                            echo "bg-red";
-                        } elseif ($fares[$rows][$col] == 2.10) {
-                            echo "bg-orange";
-                        } elseif ($fares[$rows][$col] == 1.60) {
-                            echo "bg-yellow";
-                        } elseif ($fares[$rows][$col] == 1.20) {
-                            echo "bg-green";
-                        } elseif ($fares[$rows][$col] == 0) {
-                            echo "bg-grey";
-                        } else {
-                            echo "bg-other";
-                        }
-
-                        echo "'>" . $fares[$rows][$col] . "</td>";
-                    }
-                    echo "</tr>";
-                }
-                ?>
-            </table>
-            </p>
-        </details>
-        <br />
-        <a class="loginbtn" href="all">All transactions</a>
         <br />
         <br />
     </section>

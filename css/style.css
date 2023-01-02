@@ -102,6 +102,9 @@ table.receipt td:nth-last-child(3n+1) {
     padding: 3px 10px;
     text-align: right;
 }
+.table-links th :hover {
+    text-decoration: underline;
+}
 .loginbtn {
     width: fit-content;
     border-bottom: var(--primary) 2px solid;
