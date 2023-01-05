@@ -45,7 +45,8 @@ $discount = array(
             <th>From \ To</th>
             <?php
             for ($i = 0; $i < count($stations); $i++) {
-                echo "<td>" . $stations[$i] . "</td>";
+                $colreverse = -$i - 1 + count($stations);
+                echo "<td>" . $stations[$colreverse] . "</td>";
             }
             ?>
         </tr>
@@ -55,28 +56,145 @@ $discount = array(
             echo "<tr>";
             echo "<td>" . $stations[$rows] . "</td>";
             for ($col = 0; $col < count($fares[$rows]); $col++) {
+
+                $colreverse = -$col - 1 + count($fares[$rows]);
+                if ($colreverse < $rows) {
+                    break;
+                }
                 echo "<td class=' ";
 
-                if ($fares[$rows][$col] == 2.50) {
+                $cell = $fares[$rows][$colreverse];
+                if ($cell == 2.50) {
                     echo "bg-red";
-                } elseif ($fares[$rows][$col] == 2.10) {
+                } elseif ($cell == 2.10) {
                     echo "bg-orange";
-                } elseif ($fares[$rows][$col] == 1.60) {
+                } elseif ($cell == 1.60) {
                     echo "bg-yellow";
-                } elseif ($fares[$rows][$col] == 1.20) {
+                } elseif ($cell == 1.20) {
                     echo "bg-green";
-                } elseif ($fares[$rows][$col] == 0) {
+                } elseif ($cell == 0) {
                     echo "bg-grey";
                 } else {
                     echo "bg-other";
                 }
 
-                echo "'>" . $fares[$rows][$col] . "</td>";
+                echo "'>" . $fares[$rows][$colreverse] . "</td>";
             }
             echo "</tr>";
         }
         ?>
     </table>
+    </p>
+</details>
+<br>
+<details <?php if (isset($page) && $page == "main") echo "open";
+            else echo "closed"; ?>>
+    <summary>Show full fares</summary>
+    <p><br />
+
+    <h2 class="2xl">From \ To</h2>
+    <?php
+    for ($rows = 0; $rows < count($stations); $rows++) {
+        $colreverse = -$rows - 1 + count($stations);
+        echo "<details>";
+        echo "<summary>" . $stations[$rows] . "</summary>";
+
+
+
+
+
+        for ($col = 0; $col < count($fares[$rows]); $col++) {
+            $colreverse = -$col - 1 + count($fares[$rows]);
+            $col = $col;
+            if ($col >= count($stations)) break;
+            echo "<span>" . $stations[$col + 1] . "</span>";
+
+            if ($colreverse < $rows) {
+                break;
+            }
+            echo "<span class=' ";
+
+            $cell = $fares[$rows][$col];
+            if ($cell == 2.50) {
+                echo "bg-red";
+            } elseif ($cell == 2.10) {
+                echo "bg-orange";
+            } elseif ($cell == 1.60) {
+                echo "bg-yellow";
+            } elseif ($cell == 1.20) {
+                echo "bg-green";
+            } elseif ($cell == 0) {
+                echo "bg-grey";
+            } else {
+                echo "bg-other";
+            }
+
+            echo "'>" . $fares[$rows][$col] . "</span>";
+            echo "<br>";
+        }
+
+
+        echo "</details>";
+    }
+
+    ?>
+
+    </p>
+</details>
+
+<br>
+<details <?php if (isset($page) && $page == "main") echo "open";
+            else echo "closed"; ?>>
+    <summary>Show full fares</summary>
+    <p><br />
+
+    <h2 class="2xl">From \ To</h2>
+    <?php
+    for ($rows = 0; $rows < count($stations); $rows++) {
+        $colreverse = -$rows - 1 + count($stations);
+        echo "<details>";
+        echo "<summary>" . $stations[$rows] . "</summary>";
+
+
+
+
+
+        for ($col = 0; $col < count($fares[$rows]); $col++) {
+            $colreverse = -$col - 1 + count($fares[$rows]);
+            $col = $col;
+            if ($col >= count($stations)) break;
+            echo "<span>" . $stations[$col + 1] . "</span>";
+
+            if ($colreverse < $rows) {
+                break;
+            }
+            echo "<span class=' ";
+
+            $cell = $fares[$rows][$col];
+            if ($cell == 2.50) {
+                echo "bg-red";
+            } elseif ($cell == 2.10) {
+                echo "bg-orange";
+            } elseif ($cell == 1.60) {
+                echo "bg-yellow";
+            } elseif ($cell == 1.20) {
+                echo "bg-green";
+            } elseif ($cell == 0) {
+                echo "bg-grey";
+            } else {
+                echo "bg-other";
+            }
+
+            echo "'>" . $fares[$rows][$col] . "</span>";
+            echo "<br>";
+        }
+
+
+        echo "</details>";
+    }
+
+    ?>
+
     </p>
 </details>
 

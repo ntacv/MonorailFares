@@ -13,6 +13,8 @@ $page = "main";
     <link rel="stylesheet" href="css/toggleButton.css">
 
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="include/script.js"></script>
+
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

@@ -87,7 +87,7 @@ table.chart {
 table.chart th,
 table.chart td {
     border-collapse: collapse;
-    border-bottom: 1px solid grey;
+    border-bottom: 0px solid grey;
     padding: 3px 10px;
 }
 table.chart tr {
