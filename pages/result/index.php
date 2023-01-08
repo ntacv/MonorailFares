@@ -17,10 +17,7 @@ session_start();
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200;400;700&display=swap" rel="stylesheet">
 </head>
 
-
 <body>
-
-
     <section class="max-w-sm m-auto">
         <br /><br />
         <h1 class="text-4xl">
@@ -28,8 +25,6 @@ session_start();
                 directions_railway
             </span>KL Monorail fares
         </h1>
-
-
         <?php
 
         if (!isset($_REQUEST['stationFrom']) || !isset($_REQUEST['stationTo']) || !isset($_REQUEST['tokenNumber']) || !isset($_REQUEST['tokenWay']) || !isset($_REQUEST['discountValue'])) {
@@ -58,9 +53,6 @@ session_start();
 
         <h2 class="text-2xl">Your trip</h2>
         <p>
-            <span class="material-icons">
-                arrow_forward
-            </span>
             <?php echo $stations[$stationFrom]; ?>
             <span class="material-icons">
                 arrow_forward
@@ -95,7 +87,7 @@ session_start();
             }
             ?>
         </table>
-
+        <br>
         <?php
 
         if (isset($_SESSION['user_id']) && isset($_SESSION['user_name']) && !isset($_REQUEST['user'])) {
@@ -120,7 +112,7 @@ session_start();
             $sql = "INSERT INTO orders (discount_id, user_id, date, station_from, station_to, price, number, way) VALUES ($discountValue, $id, now(), $stationFrom, $stationTo, $total, $tokenNumber, $tokenWay)";
 
             if ($result = $conn->query($sql)) {
-                echo "Inserted in the DB";
+                echo "Trip saved!";
             } else {
                 echo "No records matching your query were found.";
             }
@@ -128,9 +120,6 @@ session_start();
             // Close connection
             $conn->close();
         }
-
-
-
         ?>
     </section>
 </body>

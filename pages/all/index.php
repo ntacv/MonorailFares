@@ -1,3 +1,14 @@
+<?php
+session_start();
+
+$input = "";
+
+if (isset($_GET['search_input'])) { //check if form was submitted
+    $input = $_GET['search_input']; //get input text
+
+    $message = "<p>You searched for: " . $input . "</p>";
+}
+?>
 <!DOCTYPE html>
 <html>
 
@@ -14,10 +25,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200;400;700&display=swap" rel="stylesheet">
 </head>
 
-
 <body>
-
-
     <section class="max-w-sm m-auto">
         <br /><br />
         <h1 class="text-4xl">
@@ -25,28 +33,23 @@
                 directions_railway
             </span>All transactions
         </h1>
+        <?php
+        include "../../includes/menu.php";
+        ?>
+        <br>
         <p>This page is for admin users</p>
-        <br>
-        <a class="loginbtn" href="../">Home</a>
-        <br>
         <br>
         <form action="" method="get">
             <input type="text" name="search_input" placeholder="Search...">
 
             <input type="submit" value="Search" class="primary-bg" />
+            <?php
+            if ($input != "") {
+            ?>
+                <input type="submit" name="reset" value="Reset" class="login_btn" />
+            <?php } ?>
         </form>
-
-
         <?php
-        if (isset($_GET['search_input'])) { //check if form was submitted
-            $input = $_GET['search_input']; //get input text
-            $message = "<p>You searched for: " . $input . "</p>";
-        }
-        ?>
-
-
-        <?php
-
         // Creating database connection
         $conn = new mysqli('localhost', 'root', '', 'monorail_fares');
 
@@ -55,61 +58,47 @@
             die("ERROR: Connection failed: " . $conn->connect_error);
         }
 
+        $sql = "SELECT users.user_id, users.name, orders.order_id, orders.user_id, orders.date, orders.price, orders.way, orders.station_from, orders.station_to, orders.number, orders.discount_id 
+        FROM orders 
+        INNER JOIN users 
+        ON users.user_id = orders.user_id
+        ";
 
-        $sql = "SELECT * FROM users";
-        if ($result = $conn->query($sql)) {
-            echo "<h1>Users</h1>";
-            while ($row = $result->fetch_array()) {
-                print_r($row);
-                echo "<br>";
-                //$result->free();
-            }
+        if (is_numeric($input)) {
+            $sql = $sql . " WHERE users.user_id = '$input' ";
+        } else {
+            $sql = $sql . " WHERE users.name LIKE '%$input%'";
         }
-        echo "<br>";
-
-
-        $sql = "SELECT * FROM orders";
-        if ($result = $conn->query($sql)) {
-            echo "<h1>Orders</h1>";
-            while ($row = $result->fetch_array()) {
-                print_r($row);
-                echo "<br>";
-                //$result->free();
-            }
-        }
-        echo "<br>";
-
-        // SQL command
-        $sql = "SELECT * FROM orders"; //WHERE users.name LIKE '%$input%'";
 
         if ($result = $conn->query($sql)) {
             if ($result->num_rows > 0) {
-                echo "<table>";
-                echo "<tr>";
-                echo "<th>id</th>";
-                echo "<th>name</th>";
-                echo "<th>email</th>";
-                echo "<th>birthdate</th>";
-                echo "</tr>";
+                echo "<table class=\"table-links\"><tr><th>ID</th><th>name</th><th>date</th><th>price</th></tr>";
                 while ($row = $result->fetch_array()) {
-                    echo "<tr>";
-                    echo "<td>" . $row['order_id'] . "</td>";
-                    echo "</tr>";
+
+                    $tokenWay = $row['way'];
+                    $stationFrom = $row['station_from'];
+                    $stationTo = $row['station_to'];
+                    $tokenNumber = $row['number'];
+                    $discountValue = $row['discount_id'];
+                    $price = $row['price'];
+                    $date = strtotime($row['date']);
+                    $date = date("F jS Y h:i a", $date);
+
+                    //print_r($row);
+                    echo "<tr onclick=\"window.location='./result?tokenWay=$tokenWay&stationFrom=$stationFrom&stationTo=$stationTo&tokenNumber=$tokenNumber&discountValue=$discountValue&user';\">
+                    <td>" . $row['user_id'] . "</td><td>" . $row['name'] . "</td><td>" . $date . "</td><td>" . $row['price'] . "</td></tr>";
+                    //$result->free();
                 }
-                echo "</table>";
-                // Free result set
-                $result->free();
             } else {
                 echo "No records matching your query were found.";
             }
         }
+        echo "<br>";
+
         // Close connection
         $conn->close();
-
         ?>
-
     </section>
-
 </body>
 
 </html>

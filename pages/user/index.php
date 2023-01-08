@@ -34,6 +34,8 @@ $user = true;
 
         $id = $_SESSION['user_id'];
         $name = $_SESSION['user_name'];
+    } else {
+        header("Location: ../");
     }
 
 
@@ -46,25 +48,16 @@ $user = true;
                 directions_railway
             </span>KL Monorail fares
         </h1>
-
-
         <?php
         include "../../includes/menu.php";
-        ?>
-
-
-        <br />
-        <?php
+        echo "<br />";
 
         //check if session is set
         if (isset($_SESSION['user_name'])) {
             echo "<h3>Hello <span class='primary-color'>" . $_SESSION['user_name'] . "</span>! Your user ID is: <span class='primary-color'>" . $_SESSION['user_id'] . "</span></h3>
             <h3>You will need your user id to connect again. </h3>";
-        } else {
-            echo "<h3>no session, try to connect</h3><br>";
         }
         ?>
-
         <br>
         <br>
         <h2 class="text-2xl">Your orders</h2>
@@ -118,7 +111,17 @@ $user = true;
                 // Free result set
                 $result->free();
             } else {
-                echo "No records matching your query were found.";
+        ?>
+                No orders yet.
+                <br>
+                <a href="../pages/form">
+                    <span class="loginbtn">
+                        <span class="material-icons">
+                            attach_money
+                        </span>Simulate
+                    </span>
+                </a>
+        <?php
             }
         }
         // Close connection

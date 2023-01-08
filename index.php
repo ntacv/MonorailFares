@@ -2,6 +2,7 @@
 session_start();
 
 $page = "main";
+$error = "";
 ?>
 <!DOCTYPE html>
 <html>
@@ -29,6 +30,7 @@ $page = "main";
     //log in function
     if (isset($_POST['user_id']) && isset($_POST['user_name'])) {
 
+
         $id = $_POST['user_id'];
         $name = $_POST['user_name'];
         // Creating database connection
@@ -49,23 +51,22 @@ $page = "main";
 
                 if ($row['name'] == $name) {
 
-                    echo "Welcome back " . $name . "! User id is " . $id;
-                    //header("Location: pages/form/");
+                    //echo "Welcome back " . $name . "! User id is " . $id;
+                    header("Location: pages/form");
 
                     $_SESSION['user_id'] = $_POST['user_id'];
                     $id = $_SESSION["user_id"];
                     $_SESSION['user_name'] = $_POST['user_name'];
                     $name = $_SESSION["user_name"];
                 } else {
-                    echo "User name does not match. Please try again.";
+                    $error = "User name does not match. Please try again.";
                 }
             } else {
-                echo "User ID not defined. Please try again.";
+                $error = "User ID not defined. Please try again or log in.";
             }
         } else {
-            echo "ERROR: Could not able to execute $sql. " . $conn->error;
+            $error = "ERROR: Could not able to execute $sql. " . $conn->error;
         }
-        echo "<br><br>";
     }
 
 
@@ -83,31 +84,39 @@ $page = "main";
         <?php
         include "includes/menu.php";
         ?>
-
-
-
         <br />
-        <?php
 
-        //check if session is set
-        if (isset($_SESSION['user_name'])) {
-            echo "<h3>Hello <span class='primary-color'>" . $_SESSION['user_name'] . "</span>! Your user ID is: <span class='primary-color'>" . $_SESSION['user_id'] .
-                "</span></h3>
-            <h3>You will need your user id to connect again. </h3>";
-        } else {
-            echo "<h3>no session, try to connect</h3><br>";
-        }
-        ?>
 
         <form action="" method="POST" class="loginform 
         <?php if (isset($_SESSION['user_id'])) echo "none"; ?>">
-            <input type="number" name="user_id" placeholder="User ID" required autofocus class="login_input_id" />
+            <input type="text" name="user_id" placeholder="User ID" required autofocus class="login_input_id w-1/5" pattern="\d*" maxlength="4">
+
             <input type="text" name="user_name" placeholder="Username" required />
             <input type="submit" value="Log in" class="primary-bg" />
             <br>
         </form>
+        <?php
 
-
+        //check if session is set
+        if (isset($_SESSION['user_name'])) {
+            echo "<h3>Username: <span class='primary-color'>" . $_SESSION['user_name'] . "</span> <br>User ID: <span class='primary-color'>" . $_SESSION['user_id'] .
+                "</span></h3><h3>You will need your user id to connect again. </h3>";
+        } else {
+            echo $error;
+        }
+        ?>
+        <br>
+        <p>
+            You can use this website to calculate the fare for your Kuala Lumpur Monorail trip. You can log in to have history of your trips.
+            <br>
+            <a href="pages/form">
+                <span class="loginbtn">
+                    <span class="material-icons">
+                        attach_money
+                    </span>Simulate
+                </span>
+            </a>
+        </p>
         <?php
         include "includes/fares.php";
         ?>

@@ -17,10 +17,7 @@ session_start();
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200;400;700&display=swap" rel="stylesheet">
 </head>
 
-
 <body>
-
-
     <section class="max-w-sm m-auto">
         <br /><br />
         <h1 class="text-4xl">
@@ -28,16 +25,19 @@ session_start();
                 directions_railway
             </span>KL Monorail fares
         </h1>
-
-        <br>
         <?php
         include "../../includes/menu.php";
         ?>
+        <br>
 
-        <br />
-
+        <h2 class="text-xl">Create an account</h2>
+        <br>
+        <form action="" method="POST" class="signupform">
+            <input type="text" name="name" placeholder="Your name" required autofocus />
+            <input type="submit" value="Sign up" class="primary-bg" />
+        </form>
+        <br>
         <?php
-
         //Sign up function
         if (isset($_POST['name'])) {
             $_SESSION['name'] = $_POST['name'];
@@ -50,23 +50,41 @@ session_start();
             if ($conn == false) {
                 die("ERROR: Could not connect. " . $conn->connect_error);
             }
+            $sql = "SELECT name FROM users WHERE name = '$name'";
 
-            $sql = "INSERT INTO users (name) VALUES ('$name')";
+            $result = $conn->query($sql);
+            if ($result == true) {
+                $input_name = $result->fetch_assoc();
+                if ($input_name != null) {
+                    echo "Sorry username already used, please try another one";
+                    echo "<br>";
+                } else {
 
-            if ($conn->query($sql) == true) {
-                $last_id = $conn->insert_id;
-                //echo "<h3>Hello " . $name . "!</h3>";
+                    $sql = "INSERT INTO users (name) VALUES ('$name')";
+                    $result = $conn->query($sql);
+                    $last_id = $conn->insert_id;
+                    $_SESSION['user_name'] = $name;
+                    $_SESSION['user_id'] = $last_id;
+                    echo "Your account has been created. ";
+                    //echo "Your account <span class='primary-color'>" . $name . "</span> has been created. Your user ID is <span class='primary-color'>" . $last_id . "</span>";
+                    echo "<br>";
+                }
             } else {
                 echo "ERROR: Could not able to execute $sql . " . $conn->error;
             }
         }
+        if (isset($_SESSION['user_id']) && isset($_SESSION['user_name'])) {
+            echo "You are logged in as <span class='primary-color'>" . $_SESSION['user_name'] . "</span> with <span class='primary-color'>" . $_SESSION['user_id'] . "</span> as user ID";
         ?>
-
-        <form action="" method="POST" class="signupform">
-            <br>
-            <input type="text" name="name" placeholder="Your name" required />
-            <input type="submit" value="Sign up" class="primary-bg" />
-        </form>
+            <br><br>
+            <a class="loginbtn" href="../">
+                <span class="material-icons">
+                    home
+                </span>Home
+            </a>
+        <?php
+        }
+        ?>
 
         <br />
         <br />

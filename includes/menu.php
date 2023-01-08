@@ -80,7 +80,7 @@
             ?>
         </div>
         <div class="container">
-            <details>
+            <details class="none">
                 <summary>menu</summary>
                 <p class="details">
 

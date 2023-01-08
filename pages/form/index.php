@@ -19,21 +19,6 @@ session_start();
 
 
 <body>
-    <?php
-    //log in function
-    if (isset($_SESSION['user_id']) && isset($_SESSION['user_name'])) {
-        $id = $_SESSION['user_id'];
-        $name = $_SESSION['user_name'];
-
-        echo "Welcome back " . $name . "! User id is " . $id . "<br>";
-        echo "Your order will be saved under this user id.";
-    } else {
-        echo "you are not logged in.";
-    }
-
-
-    ?>
-
     <section class="max-w-sm m-auto">
         <br /><br />
         <h1 class="text-4xl">
@@ -45,20 +30,25 @@ session_start();
         <br>
         <?php
         include "../../includes/menu.php";
-        ?>
-        <?php
-        include "../../includes/fares.php";
+        echo "<br>";
 
+        //log in function
+        if (isset($_SESSION['user_id']) && isset($_SESSION['user_name'])) {
+            $id = $_SESSION['user_id'];
+            $name = $_SESSION['user_name'];
 
-        if (isset($_post['user_id'])) {
-            $user_id = $_post['user_id'];
-            echo "<h3>Hello $user_id </h3>";
+            echo "Welcome <span class='primary-color'>" . $name . "</span>! ";
+            echo "Order a trip to save it on your account.";
+        } else {
+            echo "Make a trip simulation to calculate the price. <br>Or log in to save it.";
         }
+        echo "<br>";
 
+        include "../../includes/fares.php";
         ?>
 
         <form action="./result" method="post">
-            <h3>Configure your trip</h3>
+            <h2 class="text-xl">Configure your trip</h2>
 
             <div class="wrapper d-flex">
                 <div class="custom-control custom-radio iconSelect mr-2">
@@ -140,10 +130,9 @@ session_start();
                     <?php
                     if ($i < -1 + count($discount)) {
                         echo "mr-2";
-                    }
-                    ?>
-                    ">
-                        <input type="radio" id="discount<?php echo $i ?>" name="discountValue" value="<?php echo $i ?>" class="custom-control-input" <?php if ($i == 0) {
+                    } ?>">
+                        <input type="radio" id="discount<?php echo $i ?>" name="discountValue" value="<?php echo $i ?>" class="custom-control-input" <?php
+                                                                                                                                                        if ($i == 0) {
                                                                                                                                                             echo " checked ";
                                                                                                                                                         } ?>>
                         <label class="custom-control-label" for="discount<?php echo $i ?>">
@@ -164,7 +153,6 @@ session_start();
         <br />
         <br />
     </section>
-
 </body>
 
 </html>
