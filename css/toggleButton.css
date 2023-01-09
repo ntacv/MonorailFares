@@ -63,3 +63,13 @@ rgb(59, 63, 65)
 var(--darkreader-bg--primary)
 rgb(45, 47, 49)
 */
+@media (prefers-color-scheme: dark) {
+    .wrapper {
+        background: #36393b;
+    }
+
+    .iconSelect .custom-control-label {
+        background-color: dimgray;
+    }
+
+}

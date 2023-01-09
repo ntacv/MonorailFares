@@ -155,7 +155,11 @@ table.receipt td:nth-last-child(3n+1) {
         background-color: var(--dark);
         color: white;
     }
-
+                select {
+                    background-color: var(--dark);
+                    color: white;
+                }
+        
     table.chart tr:nth-child(even) {
         background: dimgray;
     }
