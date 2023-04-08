@@ -47,7 +47,7 @@ session_start();
         include "../../includes/fares.php";
         ?>
 
-        <form action="./result/" method="post">
+        <form action="../result/" method="post">
             <h2 class="text-xl">Configure your trip</h2>
 
             <div class="wrapper d-flex">
@@ -133,16 +133,17 @@ session_start();
                     <?php
                     if ($i < -1 + count($discount)) {
                         echo "mr-2";
-                    } ?>">
+                    } ?>
+                    ">
                         <input type="radio" id="discount<?php echo $i ?>" name="discountValue" value="<?php echo $i ?>" class="custom-control-input" <?php
-                                                                                                                                                        if ($i == 0) {
-                                                                                                                                                            echo " checked ";
-                                                                                                                                                        } ?>>
+                        if ($i == 1) {
+                            echo " checked ";
+                        } ?>
+                        >
                         <label class="custom-control-label" for="discount<?php echo $i ?>">
-
-                            <?php
-                            echo "<i class='material-icons'>" . $discount[$i]["icon"] . "</i>" . $discount[$i]["type"] . $i;
-                            ?>
+                        <?php
+                            echo "<i class='material-icons'>" . $discount[$i]["icon"] . "</i>" . $discount[$i]["type"] ." ";
+                        ?>
                         </label>
                     </div>
                 <?php

@@ -30,7 +30,7 @@ include "../../includes/sql_request.php";
         <?php
 
         if (!isset($_REQUEST['stationFrom']) || !isset($_REQUEST['stationTo']) || !isset($_REQUEST['tokenNumber']) || !isset($_REQUEST['tokenWay']) || !isset($_REQUEST['discountValue'])) {
-            header("Location: ./form/");
+            header("Location: ../form/");
             exit();
         }
 
@@ -46,8 +46,8 @@ include "../../includes/sql_request.php";
         #$total = $_REQUEST['total'];
 
         $discountPercent = $discount[$discountValue]['value'];
-        $discountName = $discount[$discountValue]['name'];
-        echo "discount " . $discountValue;
+        $discountName = $discount[$discountValue]['type'];
+        //echo "discount " . $discountValue;
 
         $stops = $stationTo - $stationFrom;
 

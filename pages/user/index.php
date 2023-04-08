@@ -95,7 +95,7 @@ include "../../includes/sql_request.php";
                     //$new_date = $date->format('d m Y H:i');
                     //if ($new_date) echo $new_date;
 
-                    echo "<tr onclick=\"window.location='./result?tokenWay=$tokenWay&stationFrom=$stationFrom&stationTo=$stationTo&tokenNumber=$tokenNumber&discountValue=$discountValue&user';\">";
+                    echo "<tr onclick=\"window.location='../result/?tokenWay=$tokenWay&stationFrom=$stationFrom&stationTo=$stationTo&tokenNumber=$tokenNumber&discountValue=$discountValue&user';\">";
                     //?tokenWay=$tokenWay&stationFrom=$stationFrom&stationTo=$stationTo&tokenNumber=$tokenNumber&discountValue=$discountValue
                     echo "<td>" . $date . "</td>";
                     echo "<td>RM " . $row['price'] . "</td>";
