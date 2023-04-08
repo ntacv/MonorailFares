@@ -8,7 +8,7 @@ CREATE TABLE discounts (
 );
 -- Table: stations
 CREATE TABLE stations (
-    station_id int NOT NULL AUTO_INCREMENT,
+    station_id int AUTO_INCREMENT,
     station varchar(30) NOT NULL,
     PRIMARY KEY (station_id)
 );
@@ -56,6 +56,16 @@ INSERT INTO stations (station_id, station) VALUES (8, 'Medan Tuanku');
 INSERT INTO stations (station_id, station) VALUES (9, 'Chow Kit');
 INSERT INTO stations (station_id, station) VALUES (10, 'Titiwangsa');
 
+INSERT INTO users (name) VALUES ('nathan');
 
 
 INSERT INTO orders (discount_id, user_id, date, station_from, station_to, price, number, way) VALUES (1, 1, '2023-01-01 19:00:00', 0, 5, 2.50, 1, 1);
+/*
+Error
+SQL query: Copy
+
+
+INSERT INTO stations (station_id, station) VALUES (1, 'Tun Sambanthan');
+MySQL said: Documentation
+
+#1062 - Duplicate entry '1' for key 'PRIMARY'

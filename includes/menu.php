@@ -2,8 +2,8 @@
 
 <head>
 
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/menu.css">
 
 
     <script src="https://cdn.tailwindcss.com"></script>
@@ -18,14 +18,14 @@
         <div class="whitespace-nowrap">
             <a class="loginbtn" href="
         <?php if (isset($page) && $page == "main") echo "";
-        else echo "../"; ?>
+        else echo "../../"; ?>
         ">
                 <span class="material-icons">
                     home
                 </span>Home</a>
 
             <a href="<?php if (isset($page) && $page == "main") echo "";
-                        else echo "../"; ?>pages/form">
+                        else echo "../../"; ?>pages/form/">
                 <span class="loginbtn">
                     <span class="material-icons">
                         attach_money
@@ -36,7 +36,7 @@
             if (isset($_SESSION["user_id"])) {
             ?>
                 <a href="<?php if (isset($page) && $page == "main") echo "";
-                            else echo "../"; ?>includes/logout.php">
+                            else echo "../../"; ?>includes/logout.php">
                     <span class="loginbtn">
                         <span class="material-icons">
                             directions_run
@@ -45,7 +45,7 @@
                 </a>
 
                 <a href="<?php if (isset($page) && $page == "main") echo "";
-                            else echo "../"; ?>pages/user">
+                            else echo "../../"; ?>pages/user/">
                     <span class="loginbtn">
                         <span class="material-icons">
                             person
@@ -61,14 +61,14 @@
             ?>
 
                 <span class="loginbtn" <?php if (isset($page) && $page == "main") echo "onclick=\"document.querySelector('.login_input_id').focus();\"";
-                                        else echo "onclick=\"window.location='../'\""; ?>>
+                                        else echo "onclick=\"window.location='../../'\""; ?>>
                     <span class="material-icons">
                         person
                     </span>Log in
                 </span>
 
                 <a href="<?php if (isset($page) && $page == "main") echo "";
-                            else echo "../"; ?>pages/signup">
+                            else echo "../../"; ?>pages/signup/">
                     <span class="loginbtn">
                         <span class="material-icons">
                             person_add

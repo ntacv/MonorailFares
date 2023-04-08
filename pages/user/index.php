@@ -7,6 +7,8 @@ session_start();
 
 $page = "user";
 $user = true;
+
+include "../../includes/sql_request.php";
 ?>
 
 <!DOCTYPE html>
@@ -15,8 +17,8 @@ $user = true;
 <head>
     <title>KL Monorail Fares</title>
 
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/toggleButton.css">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/toggleButton.css">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -35,7 +37,7 @@ $user = true;
         $id = $_SESSION['user_id'];
         $name = $_SESSION['user_name'];
     } else {
-        header("Location: ../");
+        header("Location: ../../");
     }
 
 
@@ -63,14 +65,6 @@ $user = true;
         <h2 class="text-2xl">Your orders</h2>
         <br>
         <?php
-
-        // Creating database connection
-        $conn = new mysqli('localhost', 'root', '', 'monorail_fares');
-
-        // Check connection
-        if ($conn == false) {
-            die("ERROR: Connection failed: " . $conn->connect_error);
-        }
 
         // SQL command
         $sql = "SELECT * FROM orders WHERE user_id = $id";
@@ -114,7 +108,7 @@ $user = true;
         ?>
                 No orders yet.
                 <br>
-                <a href="../pages/form">
+                <a href="../pages/form/">
                     <span class="loginbtn">
                         <span class="material-icons">
                             attach_money

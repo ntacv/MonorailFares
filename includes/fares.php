@@ -13,6 +13,8 @@
         -->
 <?php
 
+            include("discounts.php");
+
 $stations = array("KL Sentral", "Tun Sambanthan", "Maharajalela", "Hang Tuah", "Imbi", "Bukit Bintang", "Raja Chulan", "Bukit Nanas", "Medan Tuanku", "Chow Kit", "Titiwangsa");
 $fares = array(
     array(0, 1.20, 1.60, 1.60, 1.60, 2.10, 2.10, 2.10, 2.50, 2.50, 2.50),
@@ -27,12 +29,7 @@ $fares = array(
     array(2.50, 2.50, 2.10, 2.10, 1.60, 1.60, 1.60, 1.20, 1.20, 0, 1.20),
     array(2.50, 2.50, 2.50, 2.10, 2.10, 2.10, 1.60, 1.60, 1.60, 1.20, 0)
 );
-$discount = array(
-    array("name" => "Adult", "value" => 1, "icon" => "groups"),
-    array("name" => "Senior", "value" => 0.25, "icon" => "elderly"),
-    array("name" => "Disabled", "value" => 0.40, "icon" => "accessible"),
-    array("name" => "Students", "value" => 0.30, "icon" => "school"),
-);
+
 ?>
 
 <br />

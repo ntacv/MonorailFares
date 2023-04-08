@@ -7,8 +7,8 @@ session_start();
 <head>
     <title>KL Monorail Fares</title>
 
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/toggleButton.css">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/toggleButton.css">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -47,7 +47,7 @@ session_start();
         include "../../includes/fares.php";
         ?>
 
-        <form action="./result" method="post">
+        <form action="./result/" method="post">
             <h2 class="text-xl">Configure your trip</h2>
 
             <div class="wrapper d-flex">
@@ -121,11 +121,14 @@ session_start();
                 Discount
             </h3>
 
-
+            <?php
+            // print_r($discount);
+            ?>
 
             <div class="wrapper d-flex">
                 <?php
-                for ($i = 0; $i < count($discount); $i++) { ?>
+                // print_r($discount);
+                for ($i = 1; $i < count($discount); $i++) { ?>
                     <div class="custom-control custom-radio iconSelect 
                     <?php
                     if ($i < -1 + count($discount)) {
@@ -138,7 +141,7 @@ session_start();
                         <label class="custom-control-label" for="discount<?php echo $i ?>">
 
                             <?php
-                            echo "<i class='material-icons'>" . $discount[$i]["icon"] . "</i>" . $discount[$i]["name"];
+                            echo "<i class='material-icons'>" . $discount[$i]["icon"] . "</i>" . $discount[$i]["type"] . $i;
                             ?>
                         </label>
                     </div>

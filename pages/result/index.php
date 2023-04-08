@@ -1,5 +1,7 @@
 <?php
 session_start();
+
+include "../../includes/sql_request.php";
 ?>
 <!DOCTYPE html>
 <html>
@@ -7,8 +9,8 @@ session_start();
 <head>
     <title>KL Monorail Fares</title>
 
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/toggleButton.css">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/toggleButton.css">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -28,7 +30,7 @@ session_start();
         <?php
 
         if (!isset($_REQUEST['stationFrom']) || !isset($_REQUEST['stationTo']) || !isset($_REQUEST['tokenNumber']) || !isset($_REQUEST['tokenWay']) || !isset($_REQUEST['discountValue'])) {
-            header("Location: ./form");
+            header("Location: ./form/");
             exit();
         }
 
@@ -43,9 +45,9 @@ session_start();
         $discountValue = $_REQUEST['discountValue'];
         #$total = $_REQUEST['total'];
 
-
         $discountPercent = $discount[$discountValue]['value'];
         $discountName = $discount[$discountValue]['name'];
+        echo "discount " . $discountValue;
 
         $stops = $stationTo - $stationFrom;
 
@@ -66,12 +68,12 @@ session_start();
             if ($travelCost == 0) {
                 echo "<tr>It's too close!</tr>";
             } else {
+                $total = $travelCost;
                 echo "<tr><td>" . $stops . " stops </td><td></td><td>" . $travelCost . "</td></tr>";
                 if ($tokenWay == 1) {
-                    $total = $fares[$stationFrom][$stationTo];
                     echo "<tr><td>One way</td><td> x1</td><td>" . $total . "</td></tr>";
                 } else {
-                    $total = $fares[$stationFrom][$stationTo] * 2;
+                    $total = $total * 2;
                     echo "<tr><td>Return</td><td>x2</td><td>" . $total . "</td></tr>";
                 }
                 if ($tokenNumber != 1) {
@@ -97,15 +99,6 @@ session_start();
 
 
             //INSERT INTO orders (discount_id, user_id, date, station_from, station_to, price, number, way) VALUES (1, 1, '2023-01-01 19:00:00', 0, 5, 2.50, 1, 1);
-
-
-            // Creating database connection
-            $conn = new mysqli('localhost', 'root', '', 'monorail_fares');
-
-            // Check connection
-            if ($conn == false) {
-                die("ERROR: Connection failed: " . $conn->connect_error);
-            }
 
             $now = date("Y-m-d H:i:s"); // 2001-03-10 17:16:18 (le format DATETIME de MySQL)
             // SQL command

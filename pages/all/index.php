@@ -8,6 +8,8 @@ if (isset($_GET['search_input'])) { //check if form was submitted
 
     $message = "<p>You searched for: " . $input . "</p>";
 }
+
+include "../../includes/sql_request.php";
 ?>
 <!DOCTYPE html>
 <html>
@@ -15,8 +17,8 @@ if (isset($_GET['search_input'])) { //check if form was submitted
 <head>
     <title>KL Monorail Fares</title>
 
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/toggleButton.css">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/toggleButton.css">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -50,13 +52,6 @@ if (isset($_GET['search_input'])) { //check if form was submitted
             <?php } ?>
         </form>
         <?php
-        // Creating database connection
-        $conn = new mysqli('localhost', 'root', '', 'monorail_fares');
-
-        // Check connection
-        if ($conn == false) {
-            die("ERROR: Connection failed: " . $conn->connect_error);
-        }
 
         $sql = "SELECT users.user_id, users.name, orders.order_id, orders.user_id, orders.date, orders.price, orders.way, orders.station_from, orders.station_to, orders.number, orders.discount_id 
         FROM orders 

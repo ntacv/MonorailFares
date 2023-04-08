@@ -3,6 +3,25 @@ session_start();
 
 $page = "main";
 $error = "";
+
+/*
+
+Links to index must be with / at the end or it will mess with the relative path to this file
+
+Todo to put online:
+
+-the relative links must be checked
+in includes/sql_request.php
+-the database conncetion must change to the online one
+for css
+
+!!!
+change this variable to prod before pushing online
+(local/prod)
+*/
+$dev = "prod";
+$_SESSION['dev'] = $dev;
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -27,19 +46,17 @@ $error = "";
 <body>
 
     <?php
+
+    include "includes/sql_request.php";
+
+
     //log in function
     if (isset($_POST['user_id']) && isset($_POST['user_name'])) {
 
 
+
         $id = $_POST['user_id'];
         $name = $_POST['user_name'];
-        // Creating database connection
-        $conn = new mysqli("localhost", "root", "", "monorail_fares");
-
-        // Checking connection
-        if ($conn == false) {
-            die("ERROR: Could not connect. " . $conn->connect_error);
-        }
 
         $sql = "SELECT * FROM users WHERE user_id = $id";
 
@@ -52,7 +69,7 @@ $error = "";
                 if ($row['name'] == $name) {
 
                     //echo "Welcome back " . $name . "! User id is " . $id;
-                    header("Location: pages/form");
+                    header("Location: pages/form/");
 
                     $_SESSION['user_id'] = $_POST['user_id'];
                     $id = $_SESSION["user_id"];
@@ -68,7 +85,6 @@ $error = "";
             $error = "ERROR: Could not able to execute $sql. " . $conn->error;
         }
     }
-
 
     ?>
 
@@ -109,7 +125,7 @@ $error = "";
         <p>
             You can use this website to calculate the fare for your Kuala Lumpur Monorail trip. You can log in to have history of your trips.
             <br>
-            <a href="pages/form">
+            <a href="pages/form/">
                 <span class="loginbtn">
                     <span class="material-icons">
                         attach_money
@@ -121,7 +137,7 @@ $error = "";
         include "includes/fares.php";
         ?>
 
-        <a class="loginbtn" href="pages/all">
+        <a class="loginbtn" href="pages/all/">
             <span class="material-icons">
                 clear_all
             </span>

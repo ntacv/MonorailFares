@@ -1,5 +1,7 @@
 <?php
 session_start();
+
+include "../../includes/sql_request.php";
 ?>
 <!DOCTYPE html>
 <html>
@@ -7,8 +9,8 @@ session_start();
 <head>
     <title>KL Monorail Fares</title>
 
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/toggleButton.css">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/toggleButton.css">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -43,13 +45,6 @@ session_start();
             $_SESSION['name'] = $_POST['name'];
             $name = $_SESSION["name"];
 
-            // Creating database connection
-            $conn = new mysqli("localhost", "root", "", "monorail_fares");
-
-            // Checking connection
-            if ($conn == false) {
-                die("ERROR: Could not connect. " . $conn->connect_error);
-            }
             $sql = "SELECT name FROM users WHERE name = '$name'";
 
             $result = $conn->query($sql);
@@ -77,7 +72,7 @@ session_start();
             echo "You are logged in as <span class='primary-color'>" . $_SESSION['user_name'] . "</span> with <span class='primary-color'>" . $_SESSION['user_id'] . "</span> as user ID";
         ?>
             <br><br>
-            <a class="loginbtn" href="../">
+            <a class="loginbtn" href="../../">
                 <span class="material-icons">
                     home
                 </span>Home
